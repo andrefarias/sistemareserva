@@ -1,0 +1,2 @@
+serviceClass: com.jornada.client.service.GWTServiceLogin
+path: 18CA1D337635154B71D9C7A93B41D507.gwt.rpc

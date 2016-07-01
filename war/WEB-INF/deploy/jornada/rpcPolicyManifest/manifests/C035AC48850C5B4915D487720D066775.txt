@@ -1,0 +1,2 @@
+serviceClass: com.jornada.client.service.GWTServiceReserva
+path: 7A6D9624041BD88FF2C38B0121A1B18E.gwt.rpc

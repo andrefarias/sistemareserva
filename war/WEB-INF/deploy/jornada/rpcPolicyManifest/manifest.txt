@@ -1,0 +1,5 @@
+# Module jornada
+# RPC service class, partial path of RPC policy file
+com.jornada.client.service.GWTServiceLogin, 18CA1D337635154B71D9C7A93B41D507.gwt.rpc
+com.jornada.client.service.GWTServiceUsuario, 1E290CC3A6E484CA8C94410C9EA77EC1.gwt.rpc
+com.jornada.client.service.GWTServiceReserva, 7A6D9624041BD88FF2C38B0121A1B18E.gwt.rpc
