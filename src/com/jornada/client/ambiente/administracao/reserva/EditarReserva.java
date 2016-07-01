@@ -235,8 +235,11 @@ public class EditarReserva extends VerticalPanel {
             public void onSuccess(Boolean success) {
                 mpPanelLoading.setVisible(false);
                 if (success == true) {
-//                    populateGrid(uniqueInstance.dataReserva, uniqueInstance.strTurno);
+                    populateGrid(uniqueInstance.dataReserva, uniqueInstance.strTurno);
 //                    telaInicialReserva.populateGrid();  
+//                	fghf
+//                	populateGrid(dataReserva, strTurno);
+//                	uniqueInstance.
                     uniqueInstance.adicionarReserva.updateMessage();
                     
                 } else {
