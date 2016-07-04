@@ -8,6 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.jornada.shared.classes.Clientes;
 import com.jornada.shared.classes.Reserva;
+import com.jornada.shared.classes.Saloes;
 
 @RemoteServiceRelativePath("GWTServiceReserva")
 public interface GWTServiceReserva  extends RemoteService {
@@ -18,6 +19,7 @@ public interface GWTServiceReserva  extends RemoteService {
 	public ArrayList<Reserva> getReservas(Date dataReserva, String strTurno);
 	public String getReservasExcel(Date dataReserva, String strTurno);
 	public Clientes getNumeroClientes(Date dataReserva, String strTurno);
+	public Saloes getSaloes();
 	public boolean deleteRow(int idReserva); 
 	public boolean updateRow(Reserva object);
 	

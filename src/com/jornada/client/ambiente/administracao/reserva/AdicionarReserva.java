@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
+import com.jornada.client.classes.listBoxes.MpListBoxSaloes;
 import com.jornada.client.classes.listBoxes.MpListBoxTurno;
 import com.jornada.client.classes.widgets.button.MpImageButton;
 import com.jornada.client.classes.widgets.datebox.MpDateBoxWithImage;
@@ -44,6 +45,8 @@ public class AdicionarReserva extends VerticalPanel {
 
 
     public MpListBoxTurno listBoxTurno;
+    
+    private MpListBoxSaloes listBoxSaloes;
 
     ConfigClient clientConfig = GWT.create(ConfigClient.class);
     private int LIMITE_MAXIMO = Integer.parseInt(clientConfig.lotacaoMaxima());
@@ -54,6 +57,7 @@ public class AdicionarReserva extends VerticalPanel {
     private MpTextBox txtNumeroCriancas;
     private MpTextBox txtCidade;
     private MpTextBox txtTelefone;
+    private MpTextBox txtMesa;
     public MpDateBoxWithImage mpDateBoxDataAgenda;
     private MpTimePicker mpTimePicker;
     private MpTextBox txtObservacao;
@@ -93,18 +97,19 @@ public class AdicionarReserva extends VerticalPanel {
         hPanelLoading.show();
         hPanelLoading.setVisible(false);
 
-        FlexTable flexTable = new FlexTable();
-        flexTable.setCellSpacing(2);
-        flexTable.setCellPadding(2);
-        flexTable.setBorderWidth(0);
-
         listBoxTurno = new MpListBoxTurno();
-        listBoxTurno.addChangeHandler(new MpCursoSelectionChangeHandler());
+        listBoxTurno.addChangeHandler(new MpTurnoSelectionChangeHandler());
+        
+        
+        listBoxSaloes = new MpListBoxSaloes();
+        listBoxSaloes.addChangeHandler(new MpTurnoSelectionChangeHandler());
+
         
         txtNomeReserva = new MpTextBox();       
         txtNumeroAdultos = new MpTextBox();     
         txtNumeroCriancas = new MpTextBox();
         txtCidade = new MpTextBox();
+        txtMesa = new MpTextBox();
         txtTelefone = new MpTextBox();
         txtObservacao = new MpTextBox();
         mpDateBoxDataAgenda = new MpDateBoxWithImage();
@@ -125,30 +130,41 @@ public class AdicionarReserva extends VerticalPanel {
         txtNumeroCriancas.setStyleName("design_text_boxes");
         txtObservacao.setStyleName("design_text_boxes");
 
-        MpLabelLeft lblNomeReserva = new MpLabelLeft("Nome da Reserva");
+        MpLabelLeft lblNomeReserva = new MpLabelLeft("Nome Reserva");
         MpLabelLeft lblTurno = new MpLabelLeft("Turno");
-        MpLabelLeft lblNumeroAdultos = new MpLabelLeft("Número Adultos");
-        MpLabelLeft lblNumeroCriancas = new MpLabelLeft("Número Crianças");
+        MpLabelLeft lblNumeroAdultos = new MpLabelLeft("Núm. Adultos");
+        MpLabelLeft lblNumeroCriancas = new MpLabelLeft("Núm. Crianças");
         MpLabelLeft lblCidade = new MpLabelLeft("Cidade");
         MpLabelLeft lblTelefone = new MpLabelLeft("Telefone");
+        MpLabelLeft lblSalao = new MpLabelLeft("Salão");
+        MpLabelLeft lblMesa = new MpLabelLeft("Núm. Mesa");
         MpLabelLeft lblDateInicial = new MpLabelLeft("Data Reserva");
-        MpLabelLeft lblHorario = new MpLabelLeft("Horário Chegada");
+        MpLabelLeft lblHorario = new MpLabelLeft("Hora Chegada");
         MpLabelLeft lblObservacao = new MpLabelLeft("Observação");
         
         lblNumeroTotal.setStyleName("label_lotacao_bold_13px");
 
-        txtNomeReserva.setWidth("250px");
-        txtCidade.setWidth("250px");
-        txtTelefone.setWidth("250px");
+        txtNomeReserva.setWidth("200px");
+        txtCidade.setWidth("200px");
+        txtTelefone.setWidth("200px");
         txtNumeroAdultos.setWidth("50px");
         txtNumeroAdultos.setMaxLength(3);
         txtNumeroCriancas.setWidth("50px");
         txtNumeroCriancas.setMaxLength(3);
+        txtMesa.setWidth("50px");
+        txtMesa.setMaxLength(3);        
         mpDateBoxDataAgenda.getDate().setWidth("150px");
         mpTimePicker.setWidth("120px");
         listBoxTurno.setWidth("120px");
-        txtObservacao.setWidth("250px");
+        listBoxSaloes.setWidth("120px");
+        txtObservacao.setWidth("200px");
 
+        
+        FlexTable flexTable = new FlexTable();
+        flexTable.setCellSpacing(2);
+        flexTable.setCellPadding(2);
+        flexTable.setBorderWidth(0);
+        
         int row = 1;
 
         flexTable.setWidget(row, 0, lblDateInicial);
@@ -158,25 +174,42 @@ public class AdicionarReserva extends VerticalPanel {
         flexTable.setWidget(row, 4, listBoxTurno);
         flexTable.setWidget(row, 5, new InlineHTML(strInLineSpace));
         flexTable.setWidget(row, 6, lblHorario);
-        flexTable.setWidget(row++, 7, mpTimePicker);
+        flexTable.setWidget(row, 7, mpTimePicker);
+        flexTable.setWidget(row, 8, new InlineHTML(strInLineSpace));
+        flexTable.setWidget(row, 9, lblSalao);
+        flexTable.setWidget(row++, 10, listBoxSaloes);
+
+        
 
         flexTable.setWidget(row, 0, lblNomeReserva);
         flexTable.setWidget(row, 1, txtNomeReserva);
         flexTable.setWidget(row, 2, new InlineHTML(strInLineSpace));
+//        flexTable.setWidget(row++, 3, gridNumero);
         flexTable.setWidget(row, 3, lblNumeroAdultos);
         flexTable.setWidget(row, 4, txtNumeroAdultos);
         flexTable.setWidget(row, 5, new InlineHTML(strInLineSpace));
         flexTable.setWidget(row, 6, lblNumeroCriancas);
-        flexTable.setWidget(row++, 7, txtNumeroCriancas);
+        flexTable.setWidget(row, 7, txtNumeroCriancas);
+        flexTable.setWidget(row, 8, new InlineHTML(strInLineSpace));
+        flexTable.setWidget(row, 9, lblMesa);
+        flexTable.setWidget(row++, 10, txtMesa);
 
-        flexTable.setWidget(row, 0, lblCidade);
-        flexTable.setWidget(row, 1, txtCidade);
+
+        flexTable.setWidget(row, 0, lblTelefone);
+        flexTable.setWidget(row, 1, txtTelefone);
         flexTable.setWidget(row, 2, new InlineHTML(strInLineSpace));
-        flexTable.setWidget(row, 3, lblTelefone);
-        flexTable.setWidget(row, 4, txtTelefone);
+//        flexTable.setWidget(row, 3, lblSalao);
+//        flexTable.setWidget(row, 4, listBoxSaloes);
+//        flexTable.setWidget(row, 5, new InlineHTML(strInLineSpace));
+//        flexTable.setWidget(row, 6, lblMesa);
+//        flexTable.setWidget(row++, 7, txtMesa);
+        
+        flexTable.setWidget(row, 3, lblCidade);
+        flexTable.setWidget(row, 4, txtCidade);
         flexTable.setWidget(row, 5, new InlineHTML(strInLineSpace));
         flexTable.setWidget(row, 6, lblObservacao);
-        flexTable.setWidget(row++, 7, txtObservacao);
+        flexTable.setWidget(row, 7, txtObservacao);
+
 
         MpImageButton btnSave = new MpImageButton(txtConstants.geralSalvar(), "images/save.png");        
         MpImageButton btnClean = new MpImageButton(txtConstants.geralLimpar(), "images/erase.png");
@@ -390,7 +423,7 @@ public class AdicionarReserva extends VerticalPanel {
         }
     }
 
-    private class MpCursoSelectionChangeHandler implements ChangeHandler {
+    private class MpTurnoSelectionChangeHandler implements ChangeHandler {
 
         public void onChange(ChangeEvent event) {
             if (mpDateBoxDataAgenda.getDate().getValue() == null) {

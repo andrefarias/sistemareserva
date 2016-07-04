@@ -8,9 +8,10 @@ public class ConfigJornada {
 
 //    public ConfigJornada() {
 //    }
+//    private static Properties connFileProperties;
 
     public static String getProperty(String key) {
-        Properties connFileProperties = new Properties();
+        Properties  connFileProperties = new Properties();
 
         try {
             InputStream configFileStream = ConfigJornada.class.getResource("Config.properties").openStream();

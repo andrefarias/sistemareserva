@@ -22,6 +22,7 @@ import com.jornada.server.classes.utility.MpUtilServer;
 import com.jornada.server.database.ConnectionManager;
 import com.jornada.shared.classes.Clientes;
 import com.jornada.shared.classes.Reserva;
+import com.jornada.shared.classes.Saloes;
 
 
 
@@ -418,6 +419,26 @@ public class ReservaServer {
 
     }
    
+    
+    public static Saloes getSaloes(){
+        
+        Saloes saloes = new Saloes();
+        
+        saloes.getSalaoInterno().setNomeSalao(SaloesServer.NOME_SALAO_INTERNO);
+        saloes.getSalaoInterno().setLimiteSalao(SaloesServer.LIMITE_SALAO_INTERNO);
+        
+        saloes.getSalaoExternoCoberto().setNomeSalao(SaloesServer.NOME_SALAO_EXTERNO_COBERTO);
+        saloes.getSalaoExternoCoberto().setLimiteSalao(SaloesServer.LIMITE_SALAO_EXTERNO_COBERTO);
+
+        saloes.getSalaoExternoAberto().setNomeSalao(SaloesServer.NOME_SALAO_EXTERNO_ABERTO);
+        saloes.getSalaoExternoAberto().setLimiteSalao(SaloesServer.LIMITE_SALAO_EXTERNO_ABERTO);
+
+        saloes.getSalaoChurrasqueira().setNomeSalao(SaloesServer.NOME_SALAO_CHURRASQUEIRA);
+        saloes.getSalaoChurrasqueira().setLimiteSalao(SaloesServer.LIMITE_SALAO_CHURRASQUEIRA);
+        
+        return saloes;
+        
+    }
     
     
     

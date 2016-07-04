@@ -4,14 +4,15 @@ import com.jornada.client.classes.listBoxes.MpSelection;
 import com.jornada.shared.classes.Turno;
 
 
-public class MpListBoxSimNao extends MpSelection {
+public class MpListBoxReservaChegou extends MpSelection {
     
     Turno turno;
     
-    public MpListBoxSimNao(){
+    public MpListBoxReservaChegou(){
         
         addItem("Sim","Sim");
         addItem("Não","Não");
+//        addItem("Saiu","Saiu");
         
     }
     

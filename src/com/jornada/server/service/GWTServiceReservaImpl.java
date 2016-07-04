@@ -8,6 +8,7 @@ import com.jornada.client.service.GWTServiceReserva;
 import com.jornada.server.classes.ReservaServer;
 import com.jornada.shared.classes.Clientes;
 import com.jornada.shared.classes.Reserva;
+import com.jornada.shared.classes.Saloes;
 
 public class GWTServiceReservaImpl extends RemoteServiceServlet implements	GWTServiceReserva {
 
@@ -26,6 +27,10 @@ public class GWTServiceReservaImpl extends RemoteServiceServlet implements	GWTSe
 	public Clientes getNumeroClientes(Date dataReserva, String strTurno){
 	    return ReservaServer.getNumeroClientes(dataReserva, strTurno);
 	}
+
+    public Saloes getSaloes(){
+        return ReservaServer.getSaloes();
+    }	
 	
 	public boolean deleteRow(int idReserva) {
 		return ReservaServer.deleteRow(idReserva);

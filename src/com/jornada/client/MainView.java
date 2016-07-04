@@ -2,8 +2,8 @@ package com.jornada.client;
 
 //import com.allen_sauer.gwt.log.client.Log;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;

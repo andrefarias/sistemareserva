@@ -39,7 +39,7 @@ import com.google.gwt.view.client.SelectionModel;
 //import com.jornada.client.ambiente.coordenador.reserva.AdicionarReserva.callbackClientes;
 import com.jornada.client.ambiente.administracao.reserva.dialog.MpDialogBoxExcelReserva;
 import com.jornada.client.classes.listBoxes.MpListBoxTurno;
-import com.jornada.client.classes.listBoxes.ambiente.general.MpListBoxSimNao;
+import com.jornada.client.classes.listBoxes.ambiente.general.MpListBoxReservaChegou;
 import com.jornada.client.classes.resources.CellTableStyle;
 import com.jornada.client.classes.widgets.button.MpImageButton;
 import com.jornada.client.classes.widgets.cells.MpDatePickerCell;
@@ -176,7 +176,7 @@ public class VisualizarReserva extends VerticalPanel {
         mpPager.setDisplay(cellTable);
         mpPager.setPageSize(50);
 
-        MpImageButton btnFiltrar = new MpImageButton(txtConstants.geralFiltrar(), "images/magnifier.png");
+//        MpImageButton btnFiltrar = new MpImageButton(txtConstants.geralFiltrar(), "images/magnifier.png");
 
         if (txtSearch == null) {
             txtSearch = new TextBox();
@@ -184,7 +184,7 @@ public class VisualizarReserva extends VerticalPanel {
         }
 
         txtSearch.addKeyUpHandler(new EnterKeyUpHandler());
-        btnFiltrar.addClickHandler(new ClickHandlerFiltrar());
+//        btnFiltrar.addClickHandler(new ClickHandlerFiltrar());
         
         
         FlexTable flexTableDate = new FlexTable();
@@ -212,7 +212,7 @@ public class VisualizarReserva extends VerticalPanel {
 //        flexTableFiltrar.setWidget(0, 6, listBoxTurno);
 //        flexTableFiltrar.setWidget(0, 7, new InlineHTML(strInLineSpace));
         flexTableFiltrar.setWidget(0, 2, txtSearch);
-        flexTableFiltrar.setWidget(0, 3, btnFiltrar);
+//        flexTableFiltrar.setWidget(0, 3, btnFiltrar);
 
         
         
@@ -479,7 +479,7 @@ public class VisualizarReserva extends VerticalPanel {
         };
         
         
-        MpListBoxSimNao mpListBoxSimNao = new MpListBoxSimNao();
+        MpListBoxReservaChegou mpListBoxSimNao = new MpListBoxReservaChegou();
         for(int i=0;i<mpListBoxSimNao.getItemCount();i++){
             listaChegou.put(mpListBoxSimNao.getValue(i), mpListBoxSimNao.getItemText(i));
         }     
@@ -512,10 +512,10 @@ public class VisualizarReserva extends VerticalPanel {
         
         cellTable.addColumn(dataReservaColumn, "Data Reserva");
         cellTable.addColumn(turnoColumn, "Turno");
-        cellTable.addColumn(horarioColumn, "Horario Chegada");
+        cellTable.addColumn(horarioColumn, "Hora Chegada");
         cellTable.addColumn(nomeReservaColumn, "Nome Reserva");
-        cellTable.addColumn(numeroAdultosColumn, "Número Adultos");
-        cellTable.addColumn(numeroCriancasColumn, "Número Crianças");
+        cellTable.addColumn(numeroAdultosColumn, "Núm. Adultos");
+        cellTable.addColumn(numeroCriancasColumn, "Núm. Crianças");
         cellTable.addColumn(cidadeColumn, "Cidade");
         cellTable.addColumn(telefoneColumn, "Telefone");
         cellTable.addColumn(chegouColumn, "Reserva Chegou");
@@ -653,11 +653,11 @@ public class VisualizarReserva extends VerticalPanel {
         }
     }
 
-    private class ClickHandlerFiltrar implements ClickHandler {
-        public void onClick(ClickEvent event) {
-            filtrarCellTable(txtSearch.getText());
-        }
-    }
+//    private class ClickHandlerFiltrar implements ClickHandler {
+//        public void onClick(ClickEvent event) {
+//            filtrarCellTable(txtSearch.getText());
+//        }
+//    }
 
     public void filtrarCellTable(String strFiltro) {
 
