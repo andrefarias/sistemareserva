@@ -2,11 +2,14 @@ package com.jornada.client.ambiente.general;
 
 import java.util.Date;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.jornada.client.classes.widgets.dialog.MpDialogBox;
 import com.jornada.client.classes.widgets.label.MpLabel;
+import com.jornada.client.content.i18n.TextConstants;
 import com.jornada.client.service.GWTServiceReserva;
 import com.jornada.shared.classes.salao.Saloes;
 
@@ -24,6 +27,10 @@ public class MpGridMsgReservaSaloes extends Grid{
     
     MpLabel lblNumeroClientes;
     
+    MpDialogBox mpDialogBoxWarning = new MpDialogBox();
+    
+    TextConstants txtConstants = GWT.create(TextConstants.class);
+    
     public MpGridMsgReservaSaloes(){
         
         super(2, 4);
@@ -32,18 +39,15 @@ public class MpGridMsgReservaSaloes extends Grid{
         this.setCellPadding(0);
         this.setBorderWidth(0);
         this.setWidth("100%");
-        
-//        lblNumeroSalaoInterno.setStyleName("labelReservaSaloes");
-//        lblNumeroSalaoExternoCoberto.setStyleName("labelReservaSaloes");
-//        lblNumeroSalaoExternoAberto.setStyleName("labelReservaSaloes");
-//        lblNumeroSalaoChurrasqueira.setStyleName("labelReservaSaloes");
-        
-      lblNumeroSalaoInterno.setStyleName("label_lotacao_13px");
-      lblNumeroSalaoExternoCoberto.setStyleName("label_lotacao_13px");
-      lblNumeroSalaoExternoAberto.setStyleName("label_lotacao_13px");
-      lblNumeroSalaoChurrasqueira.setStyleName("label_lotacao_13px");
-        
-        Label lblInterno = new Label(Saloes.STR_NOME_SALAO_INTERNO +" ["+Saloes.INT_LIMITE_SALAO_INTERNO+"]");        
+
+        mpDialogBoxWarning.setTYPE_MESSAGE(MpDialogBox.TYPE_WARNING);
+
+        lblNumeroSalaoInterno.setStyleName("label_lotacao_13px");
+        lblNumeroSalaoExternoCoberto.setStyleName("label_lotacao_13px");
+        lblNumeroSalaoExternoAberto.setStyleName("label_lotacao_13px");
+        lblNumeroSalaoChurrasqueira.setStyleName("label_lotacao_13px");
+
+        Label lblInterno = new Label(Saloes.STR_NOME_SALAO_INTERNO + " [" + Saloes.INT_LIMITE_SALAO_INTERNO + "]");
         Label lblExternoCoberto = new Label(Saloes.STR_NOME_SALAO_EXTERNO_COBERTO +" ["+Saloes.INT_LIMITE_SALAO_EXTERNO_COBERTO+"]");
         Label lblExternoAberto = new Label(Saloes.STR_NOME_SALAO_EXTERNO_ABERTO +" ["+Saloes.INT_LIMITE_SALAO_EXTERNO_ABERTO+"]");
         Label lblChurrasqueira = new Label(Saloes.STR_NOME_SALAO_CHURRASQUEIRA +" ["+Saloes.INT_LIMITE_SALAO_CHURRASQUEIRA+"]");
@@ -100,11 +104,9 @@ public class MpGridMsgReservaSaloes extends Grid{
     private class callbackSaloes implements AsyncCallback<Saloes> {
 
         public void onFailure(Throwable caught) {
-//            mpPanelLoading.setVisible(false);
-//            mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
-//            mpDialogBoxWarning.setBodyText("Reserva não pode ser salva com sucesso");
-//            mpDialogBoxWarning.showDialog();
-//            Window.alert("");
+            mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
+            mpDialogBoxWarning.setBodyText("Erro : "+caught.getMessage());
+            mpDialogBoxWarning.showDialog();
         }
 
         public void onSuccess(Saloes saloes) {
