@@ -81,15 +81,16 @@ public class MainTitle extends Composite {
 		horizontalPanelTop.setStyleName("tabela_mainview_titulo");
 		horizontalPanelTop.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		initWidget(verticalPanel);
-		verticalPanel.setSize("100%", "100px");
-		horizontalPanelTop.setSize("100%", "40px");
+		verticalPanel.setSize("100%", "80px");
+		horizontalPanelTop.setSize("100%", "30px");
+		horizontalPanelTop.setBorderWidth(0);
 		verticalPanel.add(horizontalPanelTop);
 		
 		Image image = new Image("images/logo/moquem-logo.png");
 //		Image image = new Image("images/gwt.png");
 		horizontalPanelTop.add(image);
 		horizontalPanelTop.setCellHorizontalAlignment(image, HasHorizontalAlignment.ALIGN_CENTER);
-		image.setSize("62px", "62px");
+		image.setSize("45px", "45px");
 		
 //		Label lblNewLabel = new Label("Ambiente Web de Apoio Escolar");
 		Label lblNewLabel = new Label(txtConstants.titleNome());

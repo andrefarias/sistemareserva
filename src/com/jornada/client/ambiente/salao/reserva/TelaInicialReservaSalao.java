@@ -59,7 +59,7 @@ public class TelaInicialReservaSalao extends Composite {
     }
 
     public void populateGrid() {
-        editarReserva.populateGrid();
+        editarReserva.updateMessageAndGrid();
 //        adicionarReserva.updateMessageAndGrid();
     }
 

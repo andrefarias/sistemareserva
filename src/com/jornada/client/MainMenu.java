@@ -731,7 +731,7 @@ public class MainMenu extends Composite implements ValueChangeHandler {
 	public void linkFerramentaCoordenadorCursoAdmin(boolean showConnectionLabel){		
 		
 	    imgFerramentaCoordenadorCursoAdmin = new Image("images/address_book_new.16.16.png");
-	    linkFerramentaCoordenadorCursoAdmin = new Hyperlink(txtConstants.cursoAdmin(), MENU_TOKEN_FERRAMENTA_COORDENADOR_CURSO_ADMIN);	    
+	    linkFerramentaCoordenadorCursoAdmin = new Hyperlink(txtConstants.cursoAdmin(), MENU_TOKEN_FERRAMENTA_COORDENADOR_RESERVA);	    
 	    linkFerramentaCoordenadorCursoAdmin.setStyleName("a");
 	    
         hPanel.add(imgFerramentaCoordenadorCursoAdmin);

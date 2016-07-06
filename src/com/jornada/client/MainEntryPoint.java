@@ -1,5 +1,6 @@
 package com.jornada.client;
 
+
 import java.util.Date;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -123,6 +124,10 @@ public class MainEntryPoint implements EntryPoint {
 		textBoxUsername.addKeyUpHandler(new KeyUpHandlerLogin());		
 		textBoxPassword.addKeyUpHandler(new KeyUpHandlerLogin());
 		btnSignIn.addClickHandler(new ClickHandlerLogin());
+		
+//		MaterialButton mButton = new MaterialButton();
+//		mButton.setText("Login");
+//		mButton.addClickHandler(new ClickHandlerLogin());
 		
 		int row=0;
 		

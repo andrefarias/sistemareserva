@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
@@ -22,7 +23,6 @@ import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Image;
@@ -38,23 +38,21 @@ import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.SelectionModel;
 //import com.jornada.client.ambiente.coordenador.reserva.AdicionarReserva.callbackClientes;
 import com.jornada.client.ambiente.administracao.reserva.dialog.MpDialogBoxExcelReserva;
+import com.jornada.client.ambiente.general.MpGridMsgReservaSaloes;
+import com.jornada.client.classes.listBoxes.MpListBoxSaloes;
 import com.jornada.client.classes.listBoxes.MpListBoxTurno;
 import com.jornada.client.classes.listBoxes.ambiente.general.MpListBoxReservaChegou;
 import com.jornada.client.classes.resources.CellTableStyle;
-import com.jornada.client.classes.widgets.button.MpImageButton;
 import com.jornada.client.classes.widgets.cells.MpDatePickerCell;
 import com.jornada.client.classes.widgets.cells.MpSimplePager;
 import com.jornada.client.classes.widgets.cells.MpStyledSelectionCell;
 import com.jornada.client.classes.widgets.datebox.MpDateBoxWithImage;
 import com.jornada.client.classes.widgets.dialog.MpDialogBox;
-import com.jornada.client.classes.widgets.label.MpLabel;
 import com.jornada.client.classes.widgets.label.MpLabelRight;
 import com.jornada.client.classes.widgets.panel.MpPanelLoading;
 import com.jornada.client.classes.widgets.panel.MpSpaceVerticalPanel;
-import com.jornada.client.content.config.ConfigClient;
 import com.jornada.client.content.i18n.TextConstants;
 import com.jornada.client.service.GWTServiceReserva;
-import com.jornada.shared.classes.Clientes;
 import com.jornada.shared.classes.Reserva;
 import com.jornada.shared.classes.utility.MpUtilClient;
 
@@ -74,13 +72,11 @@ public class VisualizarReserva extends VerticalPanel {
     private Column<Reserva, String> observacaoColumn;
     private Column<Reserva, String> chegouColumn;
     private Column<Reserva, Date> dataReservaColumn;
-
-    public Grid gridInformacao;
+    private Column<Reserva, String> salaoColumn;
+    private Column<Reserva, String> mesaColumn;
     
-    ConfigClient clientConfig = GWT.create(ConfigClient.class);
-    private int LIMITE_MAXIMO = Integer.parseInt(clientConfig.lotacaoMaxima());
-    private int LIMITE_QUASE_MAXIMO = Integer.parseInt(clientConfig.lotacaoQuaseMaxima());
-
+    private MpGridMsgReservaSaloes gridMsgReservaSaloes;
+    
     private TextBox txtSearch;
     ArrayList<Reserva> arrayListBackup = new ArrayList<Reserva>();
     
@@ -96,13 +92,15 @@ public class VisualizarReserva extends VerticalPanel {
     
     private MpDateBoxWithImage mpDateBoxDataAgenda;
     MpListBoxTurno listBoxTurno;
+    MpListBoxSaloes listBoxSaloes;
     
     public Date dataReserva;
     public String strTurno;
-    
-    public MpLabel lblNumeroTotal = new MpLabel("");
+
 
     private static VisualizarReserva uniqueInstance;
+    
+    final SelectionModel<Reserva> selectionModel;
 
     public static VisualizarReserva getInstance() {
 
@@ -134,6 +132,8 @@ public class VisualizarReserva extends VerticalPanel {
         mpDateBoxDataAgenda.getDate().setValue(new Date());
         mpDateBoxDataAgenda.getDate().addValueChangeHandler(new MyDateValueChangeHandler());
         
+        listBoxSaloes = new MpListBoxSaloes();
+        
         listBoxTurno = new MpListBoxTurno();
         listBoxTurno.addChangeHandler(new MpCursoSelectionChangeHandler());
         
@@ -142,17 +142,7 @@ public class VisualizarReserva extends VerticalPanel {
 
         Label lblEmpty = new Label("Nenhuma reserva associada a esta Data ou turno.");
         
-        gridInformacao = new Grid(1, 1);
-        gridInformacao.setStyleName("fundo_tabela_lotacao_vazia");
-        gridInformacao.setCellSpacing(2);
-        gridInformacao.setCellPadding(2);
-        {
-            gridInformacao.setWidget(0, 0, lblNumeroTotal);
-        }
-        gridInformacao.setWidth("100%");
-//        gridInformacao.setBorderWidth(1);
-        lblNumeroTotal.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        lblNumeroTotal.setStyleName("label_lotacao_bold_13px");
+        gridMsgReservaSaloes = new MpGridMsgReservaSaloes();
         
         MpSpaceVerticalPanel mpSpaceVerticalPanel = new MpSpaceVerticalPanel();
         mpSpaceVerticalPanel.setBorderWidth(1);
@@ -167,7 +157,7 @@ public class VisualizarReserva extends VerticalPanel {
 
         dataProvider.addDataDisplay(cellTable);
 
-        final SelectionModel<Reserva> selectionModel = new MultiSelectionModel<Reserva>(Reserva.KEY_PROVIDER);
+        selectionModel = new MultiSelectionModel<Reserva>(Reserva.KEY_PROVIDER);
         cellTable.setSelectionModel(selectionModel, DefaultSelectionEventManager.<Reserva> createCheckboxManager());
 
         initTableColumns(selectionModel);
@@ -176,15 +166,12 @@ public class VisualizarReserva extends VerticalPanel {
         mpPager.setDisplay(cellTable);
         mpPager.setPageSize(50);
 
-//        MpImageButton btnFiltrar = new MpImageButton(txtConstants.geralFiltrar(), "images/magnifier.png");
-
         if (txtSearch == null) {
             txtSearch = new TextBox();
             txtSearch.setStyleName("design_text_boxes");
         }
 
         txtSearch.addKeyUpHandler(new EnterKeyUpHandler());
-//        btnFiltrar.addClickHandler(new ClickHandlerFiltrar());
         
         
         FlexTable flexTableDate = new FlexTable();
@@ -199,22 +186,15 @@ public class VisualizarReserva extends VerticalPanel {
         flexTableDate.setWidget(0, 5, new MpSpaceVerticalPanel());
         flexTableDate.setWidget(0, 6, mpPanelLoading);
 
+
         FlexTable flexTableFiltrar = new FlexTable();
         flexTableFiltrar.setCellSpacing(3);
         flexTableFiltrar.setCellPadding(3);
         flexTableFiltrar.setBorderWidth(0);
         flexTableFiltrar.setWidget(0, 0, mpPager);
         flexTableFiltrar.setWidget(0, 1, new MpSpaceVerticalPanel());
-//        flexTableFiltrar.setWidget(0, 2, lblDateInicial);
-//        flexTableFiltrar.setWidget(0, 3, mpDateBoxDataAgenda);
-//        flexTableFiltrar.setWidget(0, 4, new InlineHTML(strInLineSpace));
-//        flexTableFiltrar.setWidget(0, 5, lblTurno);
-//        flexTableFiltrar.setWidget(0, 6, listBoxTurno);
-//        flexTableFiltrar.setWidget(0, 7, new InlineHTML(strInLineSpace));
         flexTableFiltrar.setWidget(0, 2, txtSearch);
-//        flexTableFiltrar.setWidget(0, 3, btnFiltrar);
 
-        
         
         Image imgExcel = new Image("images/excel.24.png");
         imgExcel.addClickHandler(new ClickHandlerExcel());
@@ -245,13 +225,9 @@ public class VisualizarReserva extends VerticalPanel {
         scrollPanel.setWidth("100%");
         scrollPanel.setAlwaysShowScrollBars(false);
         scrollPanel.add(cellTable);
-        
-        MpLabel lblLimiteMaximo = new MpLabel("*Limite Máximo de Clientes : " + clientConfig.lotacaoMaxima());
-        lblLimiteMaximo.setStyleName("label_lotacao_bold_13px");
 
         VerticalPanel vPanelVisualizarGrid = new VerticalPanel();
-        vPanelVisualizarGrid.add(gridInformacao);
-        vPanelVisualizarGrid.add(lblLimiteMaximo);
+        vPanelVisualizarGrid.add(gridMsgReservaSaloes);
         vPanelVisualizarGrid.add(flexTableDate);
         vPanelVisualizarGrid.add(mpSpaceVerticalPanel);
         vPanelVisualizarGrid.add(flexTableMenu);
@@ -280,87 +256,16 @@ public class VisualizarReserva extends VerticalPanel {
             }
         };
 
-//        callbackDeletePeriodo = new AsyncCallback<Boolean>() {
-//
-//            public void onSuccess(Boolean success) {
-//                mpPanelLoading.setVisible(false);
-//                if (success == true) {
-////                    populateGrid(uniqueInstance.dataReserva, uniqueInstance.strTurno);
-////                    telaInicialReserva.populateGrid();  
-////                    uniqueInstance.adicionarReserva.updateMessage();
-//                    
-//                } else {
-//                    mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
-//                    mpDialogBoxWarning.setBodyText(txtConstants.geralErroRemover("a reserva."));
-//                    mpDialogBoxWarning.showDialog();
-//                }
-//
-//            }
-//
-//            public void onFailure(Throwable caught) {
-//                mpPanelLoading.setVisible(false);
-//                mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
-//                mpDialogBoxWarning.setBodyText(txtConstants.geralErroRemover(txtConstants.periodo()));
-//                mpDialogBoxWarning.showDialog();
-//
-//            }
-//        };
-
         /*********************** End Callbacks **********************/
 
 
-//        populateGrid();
-        updateMessageAndGrid();
+        updateMessageAndGrid();        
         
         setWidth("100%");
         super.add(vPanelVisualizarGrid);
 
     }
 
-//    private class MyImageCell extends ImageCell {
-//
-//        @Override
-//        public Set<String> getConsumedEvents() {
-//            Set<String> consumedEvents = new HashSet<String>();
-//            consumedEvents.add("click");
-//            return consumedEvents;
-//        }
-//
-//        @Override
-//        public void onBrowserEvent(Context context, Element parent, String value, NativeEvent event, ValueUpdater<String> valueUpdater) {
-//            switch (DOM.eventGetType((Event) event)) {
-//            case Event.ONCLICK:
-//                final Reserva per = (Reserva) context.getKey();
-//                @SuppressWarnings("unused")
-//                CloseHandler<PopupPanel> closeHandler;
-//
-//                MpConfirmDialogBox confirmationDialog = new MpConfirmDialogBox(txtConstants.geralRemover(), "Deseja Remover a reserva no nome de "+(per.getNomeReserva())+"?", txtConstants.geralSim(), txtConstants.geralNao(),
-//
-//                closeHandler = new CloseHandler<PopupPanel>() {
-//
-//                    public void onClose(CloseEvent<PopupPanel> event) {
-//
-//                        MpConfirmDialogBox x = (MpConfirmDialogBox) event.getSource();
-//
-//                        if (x.primaryActionFired()) {
-//
-//                            GWTServiceReserva.Util.getInstance().deleteRow(per.getIdReserva(), callbackDeletePeriodo);
-//
-//                        }
-//                    }
-//                }
-//
-//                );
-//                confirmationDialog.paint();
-//                break;
-//
-//            default:
-//                Window.alert("Test default");
-//                break;
-//            }
-//        }
-//
-//    }
 
     public void populateGrid() {
         mpPanelLoading.setVisible(true);
@@ -499,8 +404,41 @@ public class VisualizarReserva extends VerticalPanel {
                 object.setChegou(value);
                 GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
             }
-        });        
-
+        });    
+        
+        
+        
+        
+//        MpStyledSelectionCell saloesCell = new MpStyledSelectionCell(listaSaloes,"design_text_boxes");
+        
+        salaoColumn = new Column<Reserva, String>(new TextCell()) {
+            @Override
+            public String getValue(Reserva object) {
+                return object.getSalao();
+            }
+        };
+//        salaoColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+//            @Override
+//            public void update(int index, Reserva object, String value) {
+//                object.setSalao(value);
+//                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
+//            }
+//        });            
+        
+        
+        mesaColumn = new Column<Reserva, String>(new EditTextCell()) {
+            @Override
+            public String getValue(Reserva object) {
+                return object.getMesa();
+            }
+        };
+        mesaColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+            @Override
+            public void update(int index, Reserva object, String value) {
+                    object.setMesa(value);
+                    GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
+            }
+        });
         
         observacaoColumn = new Column<Reserva, String>(new TextCell()) {
             @Override
@@ -508,22 +446,25 @@ public class VisualizarReserva extends VerticalPanel {
                 return object.getObservacao();
             }
         };
-
         
-        cellTable.addColumn(dataReservaColumn, "Data Reserva");
+        cellTable.addColumn(dataReservaColumn, "Data");
         cellTable.addColumn(turnoColumn, "Turno");
-        cellTable.addColumn(horarioColumn, "Hora Chegada");
-        cellTable.addColumn(nomeReservaColumn, "Nome Reserva");
-        cellTable.addColumn(numeroAdultosColumn, "Núm. Adultos");
-        cellTable.addColumn(numeroCriancasColumn, "Núm. Crianças");
+        cellTable.addColumn(horarioColumn, "Horário");
+        cellTable.addColumn(salaoColumn, "Salão");
+        cellTable.addColumn(nomeReservaColumn, "Nome");
+        cellTable.addColumn(numeroAdultosColumn, "Adultos");
+        cellTable.addColumn(numeroCriancasColumn, "Crianças");
+        cellTable.addColumn(mesaColumn, "*Mesa");
         cellTable.addColumn(cidadeColumn, "Cidade");
         cellTable.addColumn(telefoneColumn, "Telefone");
-        cellTable.addColumn(chegouColumn, "Reserva Chegou");
+        cellTable.addColumn(chegouColumn, "*Chegou");
         cellTable.addColumn(observacaoColumn, "Observação");        
 
         
         cellTable.getColumn(cellTable.getColumnIndex(turnoColumn)).setCellStyleNames("edit-cell");
         cellTable.getColumn(cellTable.getColumnIndex(horarioColumn)).setCellStyleNames("edit-cell");
+        cellTable.getColumn(cellTable.getColumnIndex(mesaColumn)).setCellStyleNames("edit-cell");
+        cellTable.getColumn(cellTable.getColumnIndex(salaoColumn)).setCellStyleNames("edit-cell");
         cellTable.getColumn(cellTable.getColumnIndex(nomeReservaColumn)).setCellStyleNames("edit-cell");
         cellTable.getColumn(cellTable.getColumnIndex(numeroAdultosColumn)).setCellStyleNames("edit-cell");
         cellTable.getColumn(cellTable.getColumnIndex(numeroCriancasColumn)).setCellStyleNames("edit-cell");
@@ -604,6 +545,14 @@ public class VisualizarReserva extends VerticalPanel {
             }
         });      
         
+        salaoColumn.setSortable(true);
+        sortHandler.setComparator(salaoColumn, new Comparator<Reserva>() {
+            @Override
+            public int compare(Reserva o1, Reserva o2) {
+                return o1.getSalao().compareTo(o2.getSalao());
+            }
+        });  
+        
         numeroAdultosColumn.setSortable(true);
         sortHandler.setComparator(numeroAdultosColumn, new Comparator<Reserva>() {
           @Override
@@ -626,18 +575,18 @@ public class VisualizarReserva extends VerticalPanel {
               Integer b = new Integer(primitive2);
               return a.compareTo(b);
           }
-        });          
+        });   
+        
+        
+        mesaColumn.setSortable(true);
+        sortHandler.setComparator(mesaColumn, new Comparator<Reserva>() {
+          @Override
+          public int compare(Reserva o1, Reserva o2) {              
+              return o1.getMesa().compareTo(o2.getMesa());
+          }
+        });  
 
 
-
-        // dataFinalColumn.setSortable(true);
-        // sortHandler.setComparator(dataFinalColumn, new Comparator<Reserva>()
-        // {
-        // @Override
-        // public int compare(Reserva o1, Reserva o2) {
-        // return o1.getDataFinal().compareTo(o2.getDataFinal());
-        // }
-        // });
 
     }
 
@@ -647,17 +596,9 @@ public class VisualizarReserva extends VerticalPanel {
 
     private class EnterKeyUpHandler implements KeyUpHandler {
         public void onKeyUp(KeyUpEvent event) {
-//            if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
                 filtrarCellTable(txtSearch.getText());
-//            }
         }
     }
-
-//    private class ClickHandlerFiltrar implements ClickHandler {
-//        public void onClick(ClickEvent event) {
-//            filtrarCellTable(txtSearch.getText());
-//        }
-//    }
 
     public void filtrarCellTable(String strFiltro) {
 
@@ -707,8 +648,7 @@ public class VisualizarReserva extends VerticalPanel {
         }
         cellTable.setPageStart(0);
     }
-    
-    
+        
     private class ClickHandlerExcel implements ClickHandler {
         @Override
         public void onClick(ClickEvent event) {
@@ -744,43 +684,6 @@ public class VisualizarReserva extends VerticalPanel {
     }
     
     
-    private class callbackClientes implements AsyncCallback<Clientes> {
-
-        public void onFailure(Throwable caught) {
-            mpPanelLoading.setVisible(false);
-            mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
-            mpDialogBoxWarning.setBodyText("Reserva não pode ser salva com sucesso");
-            mpDialogBoxWarning.showDialog();
-        }
-
-        public void onSuccess(Clientes result) {
-
-            mpPanelLoading.setVisible(false);
-
-            String strNumeroAdultos = "Adultos : " + Integer.toString(result.getNumeroTotalAdultos()) + " | ";
-            String strNumeroCriancas = "Crianças : " + Integer.toString(result.getNumeroTotalCriancas()) + " | ";
-
-            int total = result.getNumeroTotalClientes();
-
-            String strNumeroTotal = "Total : " + total;
-
-            if (total > LIMITE_MAXIMO) {
-//                lblNumeroTotal.setStyleName("erro_lotacao");
-                gridInformacao.setStyleName("fundo_tabela_lotacao_esgotada");
-            } else if (total >= LIMITE_QUASE_MAXIMO && total < LIMITE_MAXIMO) {
-//                lblNumeroTotal.setStyleName("erro_quase_lotacao");
-                gridInformacao.setStyleName("fundo_tabela_lotacao_quase_esgotada");
-            } else {
-//                lblNumeroTotal.setStyleName("lotacao_vazia");
-                gridInformacao.setStyleName("fundo_tabela_lotacao_vazia");
-            }
-
-//            lblNumeroTotal.setText("Limite Máximo de Clientes : "+clientConfig.lotacaoMaxima()+" - "+strNumeroAdultos + strNumeroCriancas + strNumeroTotal);
-            lblNumeroTotal.setText(strNumeroAdultos + strNumeroCriancas + strNumeroTotal);
-        }
-
-    }
-    
     public void updateMessageAndGrid() {
         updateMessage();
         populateGrid();        
@@ -788,7 +691,7 @@ public class VisualizarReserva extends VerticalPanel {
     
     
     public void updateMessage(){
-        GWTServiceReserva.Util.getInstance().getNumeroClientes(mpDateBoxDataAgenda.getDate().getValue(), listBoxTurno.getSelectedValue(), new callbackClientes());
+        gridMsgReservaSaloes.updateMessage(mpDateBoxDataAgenda.getDate().getValue(), listBoxTurno.getSelectedValue());
     }
 
 }

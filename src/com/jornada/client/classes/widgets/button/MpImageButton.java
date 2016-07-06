@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Image;
  *
  * @author waf039
  */
-public class MpImageButton extends Button
+public class MpImageButton extends Button 
 {
     
     

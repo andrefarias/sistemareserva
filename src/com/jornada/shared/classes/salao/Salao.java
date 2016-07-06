@@ -1,4 +1,4 @@
-package com.jornada.shared.classes;
+package com.jornada.shared.classes.salao;
 
 import java.io.Serializable;
 
@@ -8,6 +8,8 @@ public class Salao implements Serializable {
     
     private String nomeSalao;
     private int limiteSalao;
+    private int quantidadeAdultos;
+    private int quantidadeCriancas;
     
     public Salao(){        
     }
@@ -24,6 +26,23 @@ public class Salao implements Serializable {
     public void setLimiteSalao(int limiteSalao) {
         this.limiteSalao = limiteSalao;
     }
+
+    public int getQuantidadeAdultos() {
+        return quantidadeAdultos;
+    }
+
+    public void setQuantidadeAdultos(int quantidadeAdultos) {
+        this.quantidadeAdultos = quantidadeAdultos;
+    }
+
+    public int getQuantidadeCriancas() {
+        return quantidadeCriancas;
+    }
+    
+    public void setQuantidadeCriancas(int quantidadeCriancas) {
+        this.quantidadeCriancas = quantidadeCriancas;
+    }
+    
     
     
     

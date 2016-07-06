@@ -22,7 +22,7 @@ import com.jornada.server.classes.utility.MpUtilServer;
 import com.jornada.server.database.ConnectionManager;
 import com.jornada.shared.classes.Clientes;
 import com.jornada.shared.classes.Reserva;
-import com.jornada.shared.classes.Saloes;
+import com.jornada.shared.classes.salao.Saloes;
 
 
 
@@ -32,11 +32,11 @@ public class ReservaServer {
 	
     public static String DB_INSERT_RESERVA = "INSERT INTO reserva"
             + "(nome_reserva, numero_adultos, numero_criancas, telefone, cidade, "
-            + " data, horario, turno, observacao, chegou) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            + " data, horario, turno, observacao, chegou, salao, mesa) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     public static String DB_UPDATE_RESERVA = "UPDATE reserva "+
     "SET nome_reserva=?, numero_adultos=?, numero_criancas=?, "+ 
-    "telefone=?, cidade=?, data=?, horario=?, turno=?, observacao=?, chegou=? "+
+    "telefone=?, cidade=?, data=?, horario=?, turno=?, observacao=?, chegou=?, salao=?, mesa=? "+
     "WHERE id_reserva=?;";
 	public static String DB_SELECT_RESERVA = "SELECT * FROM reserva order by data, nome_reserva, horario asc;";
 	public static String DB_SELECT_RESERVA_DATE = "SELECT * FROM reserva where data=? and turno=? order by data, nome_reserva, horario asc;";
@@ -78,6 +78,8 @@ public class ReservaServer {
             psInsertReserva.setString(++param, object.getTurno());
             psInsertReserva.setString(++param, object.getObservacao());
             psInsertReserva.setString(++param, "Não");
+            psInsertReserva.setString(++param, object.getSalao());
+            psInsertReserva.setString(++param, object.getMesa());
             
             psInsertReserva.executeUpdate();
 //            rs.next();
@@ -147,7 +149,7 @@ public class ReservaServer {
 
     }
     
-  	public static Clientes getNumeroClientes(Date dataReservas,String strTurno) {
+  	public static Clientes getNumeroClientes(Date dataReservas,String strTurno, String strSalao) {
 
 	        Clientes clientes = new Clientes();
 	        ArrayList<Reserva> data = new ArrayList<Reserva>();
@@ -248,6 +250,8 @@ public class ReservaServer {
 			updateReserva.setString(++count, object.getTurno());
 			updateReserva.setString(++count, object.getObservacao());
 			updateReserva.setString(++count, object.getChegou());
+			updateReserva.setString(++count, object.getSalao());
+			updateReserva.setString(++count, object.getMesa());
 			updateReserva.setInt(++count, object.getIdReserva());
 
 			int numberUpdate = updateReserva.executeUpdate();
@@ -288,6 +292,8 @@ public class ReservaServer {
 			object.setTurno(rs.getString("turno"));
 			object.setObservacao(rs.getString("observacao"));
 			object.setChegou(rs.getString("chegou"));
+			object.setMesa(rs.getString("mesa"));
+			object.setSalao(rs.getString("salao"));
 			   
 			  
 			data.add(object);
@@ -368,9 +374,11 @@ public class ReservaServer {
         row.createCell((short) intColumn++).setCellValue("DataReserva");
         row.createCell((short) intColumn++).setCellValue("Turno");
         row.createCell((short) intColumn++).setCellValue("H.Chegada");
+        row.createCell((short) intColumn++).setCellValue("Salão");
         row.createCell((short) intColumn++).setCellValue("NomeReserva");
         row.createCell((short) intColumn++).setCellValue("Adultos");
-        row.createCell((short) intColumn++).setCellValue("Crianças");        
+        row.createCell((short) intColumn++).setCellValue("Crianças"); 
+        row.createCell((short) intColumn++).setCellValue("Mesa"); 
         row.createCell((short) intColumn++).setCellValue("Cidade");
         row.createCell((short) intColumn++).setCellValue("Telefone");
         row.createCell((short) intColumn++).setCellValue("Chegou");
@@ -389,9 +397,11 @@ public class ReservaServer {
             row.createCell((short) intColumn++).setCellValue((reserva.getDataReserva()==null)?"":MpUtilServer.convertDateToString(reserva.getDataReserva()));
             row.createCell((short) intColumn++).setCellValue(reserva.getTurno());
             row.createCell((short) intColumn++).setCellValue(reserva.getHorario());
+            row.createCell((short) intColumn++).setCellValue(reserva.getSalao());
             row.createCell((short) intColumn++).setCellValue(reserva.getNomeReserva());
             row.createCell((short) intColumn++).setCellValue(reserva.getNumeroAdultos());
             row.createCell((short) intColumn++).setCellValue(reserva.getNumeroCriancas());
+            row.createCell((short) intColumn++).setCellValue(reserva.getMesa());
             row.createCell((short) intColumn++).setCellValue(reserva.getCidade());      
             row.createCell((short) intColumn++).setCellValue(reserva.getTelefone());
             row.createCell((short) intColumn++).setCellValue(reserva.getChegou());
@@ -441,6 +451,75 @@ public class ReservaServer {
     }
     
     
+
+    
+    public static Saloes getQuantidadeClientesNosSaloes(Date dataReservas, String strTurno) {
+
+        Saloes saloes = new Saloes();
+        ArrayList<Reserva> data = new ArrayList<Reserva>();
+        Connection connection = ConnectionManager.getConnection();
+
+        try 
+        {
+
+            PreparedStatement ps = connection.prepareStatement(DB_SELECT_RESERVA_DATE);
+            
+          int count=0;
+          ps.setDate(++count, new java.sql.Date(dataReservas.getTime()));  
+          ps.setString(++count, strTurno);  
+          
+          data = getReservaParameters(ps.executeQuery());
+
+          for(Reserva reserva: data){
+
+                if (reserva.getSalao().equals(Saloes.STR_NOME_SALAO_INTERNO)) {
+                    int intAdulto = saloes.getSalaoInterno().getQuantidadeAdultos();
+                    int intCriancas = saloes.getSalaoInterno().getQuantidadeCriancas();
+                    saloes.getSalaoInterno().setQuantidadeAdultos(intAdulto + reserva.getNumeroAdultos());
+                    saloes.getSalaoInterno().setQuantidadeCriancas(intCriancas + reserva.getNumeroCriancas());
+                } else if (reserva.getSalao().equals(Saloes.STR_NOME_SALAO_EXTERNO_COBERTO)) {
+                    int intAdulto = saloes.getSalaoExternoCoberto().getQuantidadeAdultos();
+                    int intCriancas = saloes.getSalaoExternoCoberto().getQuantidadeCriancas();
+                    saloes.getSalaoExternoCoberto().setQuantidadeAdultos(intAdulto + reserva.getNumeroAdultos());
+                    saloes.getSalaoExternoCoberto().setQuantidadeCriancas(intCriancas + reserva.getNumeroCriancas());
+                } else if (reserva.getSalao().equals(Saloes.STR_NOME_SALAO_EXTERNO_ABERTO)) {
+                    int intAdulto = saloes.getSalaoExternoAberto().getQuantidadeAdultos();
+                    int intCriancas = saloes.getSalaoExternoAberto().getQuantidadeCriancas();
+                    saloes.getSalaoExternoAberto().setQuantidadeAdultos(intAdulto + reserva.getNumeroAdultos());
+                    saloes.getSalaoExternoAberto().setQuantidadeCriancas(intCriancas + reserva.getNumeroCriancas());
+                } else if (reserva.getSalao().equals(Saloes.STR_NOME_SALAO_CHURRASQUEIRA)) {
+                    int intAdulto = saloes.getSalaoChurrasqueira().getQuantidadeAdultos();
+                    int intCriancas = saloes.getSalaoChurrasqueira().getQuantidadeCriancas();
+                    saloes.getSalaoChurrasqueira().setQuantidadeAdultos(intAdulto + reserva.getNumeroAdultos());
+                    saloes.getSalaoChurrasqueira().setQuantidadeCriancas(intCriancas + reserva.getNumeroCriancas());
+                }
+
+          }          
+          
+          
+          saloes.setTotalAdultos(saloes.getSalaoInterno().getQuantidadeAdultos() + 
+                  saloes.getSalaoExternoCoberto().getQuantidadeAdultos() +
+                  saloes.getSalaoExternoAberto().getQuantidadeAdultos() +
+                  saloes.getSalaoChurrasqueira().getQuantidadeAdultos());
+          
+          saloes.setTotalCriancas(saloes.getSalaoInterno().getQuantidadeCriancas() + 
+                  saloes.getSalaoExternoCoberto().getQuantidadeCriancas() +
+                  saloes.getSalaoExternoAberto().getQuantidadeCriancas() +
+                  saloes.getSalaoChurrasqueira().getQuantidadeCriancas());
+          
+          saloes.setTotalClientes(saloes.getTotalAdultos() + saloes.getTotalCriancas());
+            
+
+        } catch (SQLException sqlex) {
+            saloes=null;
+            System.err.println(sqlex.getMessage());
+        } finally {
+            ConnectionManager.closeConnection(connection);
+        }
+
+        return saloes;
+
+    }
     
 		
 

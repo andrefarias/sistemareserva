@@ -27,7 +27,7 @@ public class TelaInicialReservaEscritorio extends Composite {
         } else {
 //            uniqueInstance.adicionarPeriodo.updateClientData();
 //            uniqueInstance.editarReserva.updateClientData();
-//            uniqueInstance.populateGrid();
+            uniqueInstance.adicionarReserva.updateMessageAndGrid();
         }
         return uniqueInstance;
     }

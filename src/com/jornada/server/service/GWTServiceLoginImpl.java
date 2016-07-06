@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.jornada.ConfigJornada;
 import com.jornada.client.service.GWTServiceLogin;
 import com.jornada.server.classes.UsuarioServer;
 import com.jornada.server.classes.password.BCrypt;
@@ -101,6 +102,13 @@ public class GWTServiceLoginImpl extends RemoteServiceServlet implements GWTServ
             }
         	
         }
+        
+        boolean isDebug = Boolean.getBoolean(ConfigJornada.getProperty("debug"));
+        
+        if(isDebug){
+            user.setLoggedIn(true);
+        }
+        
         return user;
     }	
 	

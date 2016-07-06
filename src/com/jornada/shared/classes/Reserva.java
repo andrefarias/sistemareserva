@@ -26,6 +26,9 @@ public class Reserva implements Serializable, Comparable<Reserva> {
     private String horario;
     private String turno;
     private String chegou;
+    private String salao;
+//    private int numeroMesa;
+    private String mesa;
 
     public Reserva() {
 
@@ -124,10 +127,47 @@ public class Reserva implements Serializable, Comparable<Reserva> {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+    
+
+    public String getSalao() {
+        return salao;
+    }
+
+    public void setSalao(String salao) {
+        this.salao = salao;
+    }
+
+
+
+//    public int getNumeroMesa() {
+//        return numeroMesa;
+//    }
+//
+//
+//
+//    public void setNumeroMesa(int numeroMesa) {
+//        this.numeroMesa = numeroMesa;
+//    }
+    
+    
+
+
 
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
+
+    public String getMesa() {
+        return mesa;
+    }
+
+
+
+    public void setMesa(String mesa) {
+        this.mesa = mesa;
+    }
+
+
 
     public String toString() {
         return "projeto:com.jornada.shared.classes.Reserva";
