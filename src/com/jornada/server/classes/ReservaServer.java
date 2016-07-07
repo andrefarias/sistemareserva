@@ -426,6 +426,7 @@ public class ReservaServer {
         for (int i = 0; i < intColumn; i++) {
             sheet.autoSizeColumn(i,true);
         }
+        
 
     }
    

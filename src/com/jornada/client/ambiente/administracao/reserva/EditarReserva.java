@@ -599,30 +599,46 @@ public class EditarReserva extends VerticalPanel {
         });
       
       
-      mesaColumn = new Column<Reserva, String>(new EditTextCell()) {
-          @Override
-          public String getValue(Reserva object) {
-              return object.getMesa();              
-          }
-
-      };
-      mesaColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
-          @Override
-          public void update(int index, Reserva object, String value) {
-//              int intNumeroMesa=0;              
-//              if (FieldVerifier.isValidInteger(value)) {
-//                  intNumeroMesa = Integer.parseInt(value);
-                  object.setMesa(value);
-                  GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
-//                  adicionarReserva.updateMessage();
-//              }
-//              else{
-//                  mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
-//                  mpDialogBoxWarning.setBodyText(txtConstants.geralErroTipo(txtConstants.geralNumeroInteiro()));
-//                  mpDialogBoxWarning.showDialog();
-//              }
-          }
-      });        
+//      mesaColumn = new Column<Reserva, String>(new EditTextCell()) {
+//          @Override
+//          public String getValue(Reserva object) {
+//              return object.getMesa();              
+//          }
+//
+//      };
+//      mesaColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+//          @Override
+//          public void update(int index, Reserva object, String value) {
+////              int intNumeroMesa=0;              
+////              if (FieldVerifier.isValidInteger(value)) {
+////                  intNumeroMesa = Integer.parseInt(value);
+//                  object.setMesa(value);
+//                  GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
+////                  adicionarReserva.updateMessage();
+////              }
+////              else{
+////                  mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
+////                  mpDialogBoxWarning.setBodyText(txtConstants.geralErroTipo(txtConstants.geralNumeroInteiro()));
+////                  mpDialogBoxWarning.showDialog();
+////              }
+//          }
+//      });       
+        
+        mesaColumn = new Column<Reserva, String>(new EditTextCell()) {
+            @Override
+            public String getValue(Reserva periodo) {
+                return periodo.getMesa();
+            }
+        };
+        mesaColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+            @Override
+            public void update(int index, Reserva periodo, String value) {
+                // Called when the user changes the value.
+                periodo.setMesa(value);
+                GWTServiceReserva.Util.getInstance().updateRow(periodo, callbackUpdateRow);
+            }
+        });
+        
       
       
 

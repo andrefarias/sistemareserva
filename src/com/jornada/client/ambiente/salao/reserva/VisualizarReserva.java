@@ -429,7 +429,7 @@ public class VisualizarReserva extends VerticalPanel {
         mesaColumn = new Column<Reserva, String>(new EditTextCell()) {
             @Override
             public String getValue(Reserva object) {
-                return object.getMesa();
+                return object.getMesa();              
             }
         };
         mesaColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
