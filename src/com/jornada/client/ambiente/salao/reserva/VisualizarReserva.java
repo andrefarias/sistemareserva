@@ -41,7 +41,6 @@ import com.jornada.client.ambiente.administracao.reserva.dialog.MpDialogBoxExcel
 import com.jornada.client.ambiente.general.MpGridMsgReservaSaloes;
 import com.jornada.client.classes.listBoxes.MpListBoxSaloes;
 import com.jornada.client.classes.listBoxes.MpListBoxTurno;
-import com.jornada.client.classes.listBoxes.ambiente.general.MpListBoxReservaChegou;
 import com.jornada.client.classes.resources.CellTableStyle;
 import com.jornada.client.classes.widgets.cells.MpDatePickerCell;
 import com.jornada.client.classes.widgets.cells.MpSimplePager;
@@ -54,6 +53,7 @@ import com.jornada.client.classes.widgets.panel.MpSpaceVerticalPanel;
 import com.jornada.client.content.i18n.TextConstants;
 import com.jornada.client.service.GWTServiceReserva;
 import com.jornada.shared.classes.Reserva;
+import com.jornada.shared.classes.salao.Saloes;
 import com.jornada.shared.classes.utility.MpUtilClient;
 
 public class VisualizarReserva extends VerticalPanel {
@@ -70,7 +70,7 @@ public class VisualizarReserva extends VerticalPanel {
     private Column<Reserva, String> numeroCriancasColumn;
     private Column<Reserva, String> horarioColumn;
     private Column<Reserva, String> observacaoColumn;
-    private Column<Reserva, String> chegouColumn;
+//    private Column<Reserva, String> chegouColumn;
     private Column<Reserva, Date> dataReservaColumn;
     private Column<Reserva, String> salaoColumn;
     private Column<Reserva, String> mesaColumn;
@@ -80,7 +80,8 @@ public class VisualizarReserva extends VerticalPanel {
     private TextBox txtSearch;
     ArrayList<Reserva> arrayListBackup = new ArrayList<Reserva>();
     
-    private LinkedHashMap<String, String> listaChegou = new LinkedHashMap<String, String>();
+//    private LinkedHashMap<String, String> listaChegou = new LinkedHashMap<String, String>();
+    private LinkedHashMap<String, String> listaSaloes = new LinkedHashMap<String, String>();
 
     MpDialogBox mpDialogBoxConfirm = new MpDialogBox();
     MpDialogBox mpDialogBoxWarning = new MpDialogBox();
@@ -245,7 +246,7 @@ public class VisualizarReserva extends VerticalPanel {
                     mpDialogBoxWarning.setBodyText(txtConstants.geralErroAtualizar(txtConstants.periodo()) + " " + txtConstants.geralRegarregarPagina());
                     mpDialogBoxWarning.showDialog();
                 }
-//                uniqueInstance.adicionarReserva.updateMessage();
+                uniqueInstance.updateMessage();
             }
 
             public void onFailure(Throwable caught) {
@@ -384,46 +385,70 @@ public class VisualizarReserva extends VerticalPanel {
         };
         
         
-        MpListBoxReservaChegou mpListBoxSimNao = new MpListBoxReservaChegou();
-        for(int i=0;i<mpListBoxSimNao.getItemCount();i++){
-            listaChegou.put(mpListBoxSimNao.getValue(i), mpListBoxSimNao.getItemText(i));
-        }     
-        
-        MpStyledSelectionCell chegouCell = new MpStyledSelectionCell(listaChegou,"design_text_boxes");
-        
-        chegouColumn = new Column<Reserva, String>(chegouCell) {
-            @Override
-            public String getValue(Reserva object) {
-                // String strHora = MpUtilClient.add_AM_PM(object.getHora());
-                return object.getChegou();
-            }
-        };
-        chegouColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
-            @Override
-            public void update(int index, Reserva object, String value) {
-                object.setChegou(value);
-                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
-            }
-        });    
+//        MpListBoxReservaChegou mpListBoxSimNao = new MpListBoxReservaChegou();
+//        for(int i=0;i<mpListBoxSimNao.getItemCount();i++){
+//            listaChegou.put(mpListBoxSimNao.getValue(i), mpListBoxSimNao.getItemText(i));
+//        }     
+//        
+//        MpStyledSelectionCell chegouCell = new MpStyledSelectionCell(listaChegou,"design_text_boxes");
+//        
+//        chegouColumn = new Column<Reserva, String>(chegouCell) {
+//            @Override
+//            public String getValue(Reserva object) {
+//                // String strHora = MpUtilClient.add_AM_PM(object.getHora());
+//                return object.getChegou();
+//            }
+//        };
+//        chegouColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+//            @Override
+//            public void update(int index, Reserva object, String value) {
+//                object.setChegou(value);
+//                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
+//            }
+//        });    
         
         
         
         
 //        MpStyledSelectionCell saloesCell = new MpStyledSelectionCell(listaSaloes,"design_text_boxes");
         
-        salaoColumn = new Column<Reserva, String>(new TextCell()) {
-            @Override
-            public String getValue(Reserva object) {
-                return object.getSalao();
-            }
-        };
+//        salaoColumn = new Column<Reserva, String>(new TextCell()) {
+//            @Override
+//            public String getValue(Reserva object) {
+//                return object.getSalao();
+//            }
+//        };
 //        salaoColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
 //            @Override
 //            public void update(int index, Reserva object, String value) {
 //                object.setSalao(value);
 //                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
 //            }
-//        });            
+//        });       
+        
+        Saloes saloes = new Saloes();
+        listaSaloes.put(saloes.getSalaoInterno().getNomeSalao(), saloes.getSalaoInterno().getNomeSalao());
+        listaSaloes.put(saloes.getSalaoExternoAberto().getNomeSalao(), saloes.getSalaoExternoAberto().getNomeSalao());
+        listaSaloes.put(saloes.getSalaoExternoCoberto().getNomeSalao(), saloes.getSalaoExternoCoberto().getNomeSalao());
+        listaSaloes.put(saloes.getSalaoChurrasqueira().getNomeSalao(), saloes.getSalaoChurrasqueira().getNomeSalao());
+
+        MpStyledSelectionCell saloesCell = new MpStyledSelectionCell(listaSaloes, "design_text_boxes");
+
+        salaoColumn = new Column<Reserva, String>(saloesCell) {
+            @Override
+            public String getValue(Reserva object) {
+
+                String strSalao = object.getSalao();
+                return strSalao;
+            }
+        };
+        salaoColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+            @Override
+            public void update(int index, Reserva object, String value) {
+                object.setSalao(value);
+                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
+            }
+        });
         
         
         mesaColumn = new Column<Reserva, String>(new EditTextCell()) {
@@ -450,14 +475,14 @@ public class VisualizarReserva extends VerticalPanel {
         cellTable.addColumn(dataReservaColumn, "Data");
         cellTable.addColumn(turnoColumn, "Turno");
         cellTable.addColumn(horarioColumn, "Horário");
-        cellTable.addColumn(salaoColumn, "Salão");
+        cellTable.addColumn(salaoColumn, "*Salão");
         cellTable.addColumn(nomeReservaColumn, "Nome");
         cellTable.addColumn(numeroAdultosColumn, "Adultos");
         cellTable.addColumn(numeroCriancasColumn, "Crianças");
         cellTable.addColumn(mesaColumn, "*Mesa");
         cellTable.addColumn(cidadeColumn, "Cidade");
         cellTable.addColumn(telefoneColumn, "Telefone");
-        cellTable.addColumn(chegouColumn, "*Chegou");
+//        cellTable.addColumn(chegouColumn, "*Chegou");
         cellTable.addColumn(observacaoColumn, "Observação");        
 
         
@@ -529,13 +554,13 @@ public class VisualizarReserva extends VerticalPanel {
             }
         });
 
-        chegouColumn.setSortable(true);
-        sortHandler.setComparator(chegouColumn, new Comparator<Reserva>() {
-            @Override
-            public int compare(Reserva o1, Reserva o2) {
-                return o1.getChegou().compareTo(o2.getChegou());
-            }
-        });
+//        chegouColumn.setSortable(true);
+//        sortHandler.setComparator(chegouColumn, new Comparator<Reserva>() {
+//            @Override
+//            public int compare(Reserva o1, Reserva o2) {
+//                return o1.getChegou().compareTo(o2.getChegou());
+//            }
+//        });
         
         observacaoColumn.setSortable(true);
         sortHandler.setComparator(observacaoColumn, new Comparator<Reserva>() {

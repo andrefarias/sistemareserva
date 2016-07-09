@@ -7,19 +7,19 @@ public class Saloes implements Serializable{
     private static final long serialVersionUID = -9075501184472606101L;
     
     public static final String STR_NOME_SALAO_INTERNO = "Interno";
-    public static final int INT_LIMITE_SALAO_INTERNO = 40;
+    public static final int INT_LIMITE_SALAO_INTERNO = 20;
     public static final int INT_QUASE_LIMITE_SALAO_INTERNO = INT_LIMITE_SALAO_INTERNO-10;
     
     public static final String STR_NOME_SALAO_EXTERNO_COBERTO = "Externo Coberto";
-    public static final int INT_LIMITE_SALAO_EXTERNO_COBERTO = 40;
+    public static final int INT_LIMITE_SALAO_EXTERNO_COBERTO = 70;
     public static final int INT_QUASE_LIMITE_EXTERNO_COBERTO = INT_LIMITE_SALAO_EXTERNO_COBERTO-10;
     
     public static final String STR_NOME_SALAO_EXTERNO_ABERTO = "Externo Aberto";
-    public static final int INT_LIMITE_SALAO_EXTERNO_ABERTO = 40;
+    public static final int INT_LIMITE_SALAO_EXTERNO_ABERTO = 29;
     public static final int INT_QUASE_LIMITE_EXTERNO_ABERTO = INT_LIMITE_SALAO_EXTERNO_ABERTO-10;
     
     public static final String STR_NOME_SALAO_CHURRASQUEIRA = "Churrasqueira";
-    public static final int INT_LIMITE_SALAO_CHURRASQUEIRA = 40;
+    public static final int INT_LIMITE_SALAO_CHURRASQUEIRA = 19;
     public static final int INT_QUASE_LIMITE_CHURRASQUEIRA = INT_LIMITE_SALAO_CHURRASQUEIRA-10;
     
     public static final int INT_LIMITE_TOTAL_CLIENTES = 

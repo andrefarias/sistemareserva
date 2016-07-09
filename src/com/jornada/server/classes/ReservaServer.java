@@ -237,6 +237,7 @@ public class ReservaServer {
 		try {
 //			dataBase.createConnection();
 //			Connection connection = dataBase.getConnection();
+			object.setChegou("Não");
 
 			int count = 0;
 			PreparedStatement updateReserva = connection.prepareStatement(DB_UPDATE_RESERVA);

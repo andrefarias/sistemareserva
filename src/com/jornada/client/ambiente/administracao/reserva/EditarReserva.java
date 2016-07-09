@@ -42,7 +42,6 @@ import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.SelectionModel;
 import com.jornada.client.ambiente.administracao.reserva.dialog.MpDialogBoxExcelReserva;
 import com.jornada.client.classes.listBoxes.MpListBoxTurno;
-import com.jornada.client.classes.listBoxes.ambiente.general.MpListBoxReservaChegou;
 import com.jornada.client.classes.resources.CellTableStyle;
 import com.jornada.client.classes.widgets.cells.MpDatePickerCell;
 import com.jornada.client.classes.widgets.cells.MpSimplePager;
@@ -75,14 +74,14 @@ public class EditarReserva extends VerticalPanel {
     private Column<Reserva, String> numeroCriancasColumn;
     private Column<Reserva, String> horarioColumn;
     private Column<Reserva, String> observacaoColumn;
-    private Column<Reserva, String> chegouColumn;
+//    private Column<Reserva, String> chegouColumn;
     private Column<Reserva, Date> dataReservaColumn;
     private Column<Reserva, String> salaoColumn;
     private Column<Reserva, String> mesaColumn;
     private LinkedHashMap<String, String> listTurno = new LinkedHashMap<String, String>();
 
     private LinkedHashMap<String, String> listaHora = new LinkedHashMap<String, String>();
-    private LinkedHashMap<String, String> listaChegou = new LinkedHashMap<String, String>();
+//    private LinkedHashMap<String, String> listaChegou = new LinkedHashMap<String, String>();
     private LinkedHashMap<String, String> listaSaloes = new LinkedHashMap<String, String>();
     
 //    private MpTimePicker mpTimePicker;
@@ -535,27 +534,27 @@ public class EditarReserva extends VerticalPanel {
             }
         });
         
-        MpListBoxReservaChegou mpListBoxSimNao = new MpListBoxReservaChegou();
-        for(int i=0;i<mpListBoxSimNao.getItemCount();i++){
-            listaChegou.put(mpListBoxSimNao.getValue(i), mpListBoxSimNao.getItemText(i));
-        }       
+//        MpListBoxReservaChegou mpListBoxSimNao = new MpListBoxReservaChegou();
+//        for(int i=0;i<mpListBoxSimNao.getItemCount();i++){
+//            listaChegou.put(mpListBoxSimNao.getValue(i), mpListBoxSimNao.getItemText(i));
+//        }       
         
-        MpStyledSelectionCell chegouCell = new MpStyledSelectionCell(listaChegou,"design_text_boxes");
+//        MpStyledSelectionCell chegouCell = new MpStyledSelectionCell(listaChegou,"design_text_boxes");
         
-        chegouColumn = new Column<Reserva, String>(chegouCell) {
-            @Override
-            public String getValue(Reserva object) {
-                // String strHora = MpUtilClient.add_AM_PM(object.getHora());
-                return object.getChegou();
-            }
-        };
-        chegouColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
-            @Override
-            public void update(int index, Reserva object, String value) {
-                object.setChegou(value);
-                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
-            }
-        });
+//        chegouColumn = new Column<Reserva, String>(chegouCell) {
+//            @Override
+//            public String getValue(Reserva object) {
+//                // String strHora = MpUtilClient.add_AM_PM(object.getHora());
+//                return object.getChegou();
+//            }
+//        };
+//        chegouColumn.setFieldUpdater(new FieldUpdater<Reserva, String>() {
+//            @Override
+//            public void update(int index, Reserva object, String value) {
+//                object.setChegou(value);
+//                GWTServiceReserva.Util.getInstance().updateRow(object, callbackUpdateRow);
+//            }
+//        });
         
         observacaoColumn = new Column<Reserva, String>(new MpTextAreaEditCell(3,50)) {
             @Override
@@ -660,7 +659,7 @@ public class EditarReserva extends VerticalPanel {
         cellTable.addColumn(mesaColumn, "#Mesa");
         cellTable.addColumn(cidadeColumn, "Cidade");
         cellTable.addColumn(telefoneColumn, "Telefone");
-        cellTable.addColumn(chegouColumn, "Chegou");
+//        cellTable.addColumn(chegouColumn, "Chegou");
         cellTable.addColumn(observacaoColumn, "Observação");        
         cellTable.addColumn(removeColumn, txtConstants.geralRemover());
 
@@ -734,21 +733,21 @@ public class EditarReserva extends VerticalPanel {
             }
         });
 
-        chegouColumn.setSortable(true);
-        sortHandler.setComparator(chegouColumn, new Comparator<Reserva>() {
-            @Override
-            public int compare(Reserva o1, Reserva o2) {
-                return o1.getChegou().compareTo(o2.getChegou());
-            }
-        });
-        
-        observacaoColumn.setSortable(true);
-        sortHandler.setComparator(observacaoColumn, new Comparator<Reserva>() {
-            @Override
-            public int compare(Reserva o1, Reserva o2) {
-                return o1.getObservacao().compareTo(o2.getObservacao());
-            }
-        });      
+//        chegouColumn.setSortable(true);
+//        sortHandler.setComparator(chegouColumn, new Comparator<Reserva>() {
+//            @Override
+//            public int compare(Reserva o1, Reserva o2) {
+//                return o1.getChegou().compareTo(o2.getChegou());
+//            }
+//        });
+//        
+//        observacaoColumn.setSortable(true);
+//        sortHandler.setComparator(observacaoColumn, new Comparator<Reserva>() {
+//            @Override
+//            public int compare(Reserva o1, Reserva o2) {
+//                return o1.getObservacao().compareTo(o2.getObservacao());
+//            }
+//        });      
         
         numeroAdultosColumn.setSortable(true);
         sortHandler.setComparator(numeroAdultosColumn, new Comparator<Reserva>() {
