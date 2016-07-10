@@ -10,7 +10,7 @@ public class Saloes implements Serializable{
     public static final int INT_LIMITE_SALAO_INTERNO = 20;
     public static final int INT_QUASE_LIMITE_SALAO_INTERNO = INT_LIMITE_SALAO_INTERNO-10;
     
-    public static final String STR_NOME_SALAO_EXTERNO_COBERTO = "Externo Coberto";
+    public static final String STR_NOME_SALAO_EXTERNO_COBERTO = "Salão Principal";
     public static final int INT_LIMITE_SALAO_EXTERNO_COBERTO = 70;
     public static final int INT_QUASE_LIMITE_EXTERNO_COBERTO = INT_LIMITE_SALAO_EXTERNO_COBERTO-10;
     
