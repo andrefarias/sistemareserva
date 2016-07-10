@@ -28,6 +28,8 @@ public class Saloes implements Serializable{
             INT_LIMITE_SALAO_EXTERNO_ABERTO + 
             INT_LIMITE_SALAO_CHURRASQUEIRA;
     
+    public static final int INT_QUASE_LIMITE_TOTAL_CLIENTES = INT_LIMITE_TOTAL_CLIENTES - 10;
+    
     private Salao salaoInterno;
     private Salao salaoExternoCoberto;
     private Salao salaoExternoAberto;

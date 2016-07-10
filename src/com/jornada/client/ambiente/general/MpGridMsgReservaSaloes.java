@@ -31,9 +31,12 @@ public class MpGridMsgReservaSaloes extends Grid{
     
     TextConstants txtConstants = GWT.create(TextConstants.class);
     
+    MpGridMsgReservaSaloes uniqueInstance;
+    
     public MpGridMsgReservaSaloes(){
         
         super(2, 4);
+        uniqueInstance = this;
         this.setStyleName("designMessage");
         this.setCellSpacing(0);
         this.setCellPadding(0);
@@ -187,9 +190,17 @@ public class MpGridMsgReservaSaloes extends Grid{
           
           String strNumeroClientes = "";
           
-          int intLimite = Saloes.INT_LIMITE_SALAO_INTERNO + Saloes.INT_LIMITE_SALAO_EXTERNO_COBERTO + Saloes.INT_LIMITE_SALAO_EXTERNO_ABERTO + Saloes.INT_LIMITE_SALAO_CHURRASQUEIRA;
-          strNumeroClientes = "*Número de Clientes : "+Integer.toString(saloes.getTotalClientes()) + " / Limite : " + intLimite;
+          int intLimiteRestaurante = Saloes.INT_LIMITE_SALAO_INTERNO + Saloes.INT_LIMITE_SALAO_EXTERNO_COBERTO + Saloes.INT_LIMITE_SALAO_EXTERNO_ABERTO + Saloes.INT_LIMITE_SALAO_CHURRASQUEIRA;
+          strNumeroClientes = "*Total de Clientes : "+Integer.toString(saloes.getTotalClientes()) + " / Limite do Restaurante: " + intLimiteRestaurante;
           lblNumeroClientes.setText(strNumeroClientes);
+          
+			if (saloes.getTotalClientes() > intLimiteRestaurante) {
+				uniqueInstance.setStyleName("fundo_tabela_lotacao_esgotada");
+			} else if (saloes.getTotalClientes() <= intLimiteRestaurante && saloes.getTotalClientes() >= Saloes.INT_QUASE_LIMITE_TOTAL_CLIENTES) {
+				uniqueInstance.setStyleName("fundo_tabela_lotacao_quase_esgotada");
+			} else if (saloes.getTotalClientes() < Saloes.INT_QUASE_LIMITE_TOTAL_CLIENTES) {
+				uniqueInstance.setStyleName("designMessage");
+			}
 //          strNumeroClientes="";
         }
 
