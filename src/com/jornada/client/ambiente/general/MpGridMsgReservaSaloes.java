@@ -161,32 +161,36 @@ public class MpGridMsgReservaSaloes extends Grid{
                 gridSalaoChurrasqueira.setStyleName("fundo_tabela_lotacao_vazia");
             }
 
-          String strAdul =   "Adul.: ";
-          String strCri =   "Cria.: ";
-          String strTot =   "Total: ";
+          String strAdul =   "Ad: ";
+          String strCri =   "Cri: ";
+          String strTot =   "Tot: ";
+          String strRest =   "Rest: ";
           String strSeparator =   " / ";
           
             
           String strNumeroAdultos = strAdul + Integer.toString(saloes.getSalaoInterno().getQuantidadeAdultos()) + strSeparator;
           String strNumeroCriancas = strCri + Integer.toString(saloes.getSalaoInterno().getQuantidadeCriancas()) + strSeparator;
-          String strNumeroTotal = strTot + Integer.toString(intInterno);
-          lblNumeroSalaoInterno.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal);
+          String strNumeroTotal = strTot + Integer.toString(intInterno)+ strSeparator;   
+          String strNumeroRestante = strRest + Integer.toString(Saloes.INT_LIMITE_SALAO_INTERNO-intInterno);   
+          lblNumeroSalaoInterno.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal+strNumeroRestante);
           
           strNumeroAdultos = strAdul + Integer.toString(saloes.getSalaoExternoCoberto().getQuantidadeAdultos()) + strSeparator;
           strNumeroCriancas = strCri + Integer.toString(saloes.getSalaoExternoCoberto().getQuantidadeCriancas()) + strSeparator;
-          strNumeroTotal = strTot + Integer.toString(intExternoCoberto);
-    
-          lblNumeroSalaoExternoCoberto.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal);       
+          strNumeroTotal = strTot + Integer.toString(intExternoCoberto)+ strSeparator;
+          strNumeroRestante = strRest + Integer.toString(Saloes.INT_LIMITE_SALAO_EXTERNO_COBERTO-intExternoCoberto);   
+          lblNumeroSalaoExternoCoberto.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal+strNumeroRestante);       
           
           strNumeroAdultos = strAdul + Integer.toString(saloes.getSalaoExternoAberto().getQuantidadeAdultos()) + strSeparator;
           strNumeroCriancas = strCri + Integer.toString(saloes.getSalaoExternoAberto().getQuantidadeCriancas()) + strSeparator;
-          strNumeroTotal = strTot + Integer.toString(intExternoAberto);
-          lblNumeroSalaoExternoAberto.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal);   
+          strNumeroTotal = strTot + Integer.toString(intExternoAberto) + strSeparator;
+          strNumeroRestante = strRest + Integer.toString(Saloes.INT_LIMITE_SALAO_EXTERNO_ABERTO-intExternoAberto);
+          lblNumeroSalaoExternoAberto.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal+strNumeroRestante);   
           
           strNumeroAdultos = strAdul + Integer.toString(saloes.getSalaoChurrasqueira().getQuantidadeAdultos()) + strSeparator;
           strNumeroCriancas = strCri + Integer.toString(saloes.getSalaoChurrasqueira().getQuantidadeCriancas()) + strSeparator;
-          strNumeroTotal = strTot + Integer.toString(intChurrasqueira);
-          lblNumeroSalaoChurrasqueira.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal);   
+          strNumeroTotal = strTot + Integer.toString(intChurrasqueira) + strSeparator;
+          strNumeroRestante = strRest + Integer.toString(Saloes.INT_LIMITE_SALAO_CHURRASQUEIRA-intChurrasqueira);   
+          lblNumeroSalaoChurrasqueira.setText(strNumeroAdultos+strNumeroCriancas+strNumeroTotal+strNumeroRestante);   
           
           String strNumeroClientes = "";
           
