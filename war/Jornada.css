@@ -307,6 +307,20 @@ cursor: pointer;
   height:18px;
 }
 
+.design_list_boxes_avaliacao {
+  background-color: #ffffff;
+  border-left: 1px solid;
+  border-left-color: gray;
+  border-top: 1px solid;
+  border-top-color: gray;
+  border-right: 1px solid;
+  border-right-color: gray;
+  border-bottom: 1px solid;
+  border-bottom-color: gray;
+  font-size:14px;  
+  font-family:Arial;
+}
+
 .design_text_rich_boxes {
   background-color: #ffffff;
   border-left: 1px solid;
@@ -324,6 +338,14 @@ cursor: pointer;
 
 /* .design_text_form{ */
  design_label{ 
+	color: #003168;
+	font-family: Arial,Verdana,sans-serif;
+	font-size: 18px;
+/* 	whitespace: pre !important; */
+	white-space: pre-line !important;
+}
+
+ design_label_avaliacao{ 
 	color: #003168;
 	font-family: Arial,Verdana,sans-serif;
 	font-size: 18px;

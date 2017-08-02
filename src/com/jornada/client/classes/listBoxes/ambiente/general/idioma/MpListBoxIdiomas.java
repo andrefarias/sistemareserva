@@ -6,11 +6,11 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
-import com.jornada.client.classes.listBoxes.MpSelection;
+import com.jornada.client.classes.listBoxes.MpListBox;
 import com.jornada.client.service.GWTServiceIdioma;
 import com.jornada.shared.classes.Idioma;
 
-public class MpListBoxIdiomas extends MpSelection {	
+public class MpListBoxIdiomas extends MpListBox {	
 	
 	private AsyncCallback<ArrayList<Idioma>> callBackPopulateComboBox;
 	

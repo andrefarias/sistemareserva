@@ -11,34 +11,34 @@ import com.jornada.client.MainView;
 import com.jornada.client.MainViewComponent;
 import com.jornada.client.content.i18n.TextConstants;
 
-public class ComponenteRelatorios extends Composite {
+public class ComponenteAvaliacao extends Composite {
 	
 	VerticalPanel vPanelMain = new VerticalPanel(); 
 	VerticalPanel vPanel1 = new VerticalPanel(); 
 	VerticalPanel vPanel2 = new VerticalPanel(); 
 	MainView mainView;
 	
-	private static ComponenteRelatorios uniqueInstance;
+	private static ComponenteAvaliacao uniqueInstance;
 
-	public static ComponenteRelatorios getInstance(MainView mainView) {
+	public static ComponenteAvaliacao getInstance(MainView mainView) {
 		if (uniqueInstance == null) {
-			uniqueInstance = new ComponenteRelatorios(mainView);
+			uniqueInstance = new ComponenteAvaliacao(mainView);
 		}
 		return uniqueInstance;
 	}		
 	
-	private ComponenteRelatorios(MainView mainView) {		
+	private ComponenteAvaliacao(MainView mainView) {		
 		
-		TextConstants txtConstants = GWT.create(TextConstants.class);
+//		TextConstants txtConstants = GWT.create(TextConstants.class);
 		
 		this.mainView=mainView;
 		
-		String strTitle = txtConstants.relatorios();
+		String strTitle = "Avaliação de Clientes\n";
 		String strImageAddress = "images/product_documentation.png";
-		String strText = txtConstants.relatorioVisualisarImprimirRelatorios();
-		strText+=txtConstants.relatorioHistoricosEscolar();
-		strText+=txtConstants.relatorioBoletimSalas();
-		strText+=txtConstants.relatorioFechamentoAno();
+		String strText = "Visualizar e imprimir avaliações\n";
+		strText+="- Gráficos\n";
+		strText+="- Estatisticas\n";
+		strText+="- Contatos Clientes";
 		
 		MainViewComponent mainViewComponent = new MainViewComponent(strTitle, strImageAddress, strText);	
 		mainViewComponent.flexTable.addClickHandler(new addClickHandler());		
@@ -54,7 +54,7 @@ public class ComponenteRelatorios extends Composite {
 		@Override
 		public void onClick(ClickEvent event) {
 		    MainMenu.isFirstEventFire = true;
-			History.newItem(MainMenu.MENU_TOKEN_FERRAMENTA_COORDENADOR_RELATORIO);			
+			History.newItem(MainMenu.MENU_TOKEN_FERRAMENTA_AVALIACAO_DE_CLIENTES);			
 		}
 		
 	}

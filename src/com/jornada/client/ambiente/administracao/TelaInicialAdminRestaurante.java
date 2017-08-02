@@ -10,6 +10,7 @@ import com.jornada.client.MainView;
 public class TelaInicialAdminRestaurante extends Composite {
 
 	ComponenteAmbienteEscritorio componenteAmbienteEscritorio; 
+	ComponenteAvaliacao componenteAvaliacao;
 //	ComponenteUsuario componenteUsuarios;	
 //	ComponenteComunicados componenteComunicados;
 //	ComponenteOcorrencia componenteOcorrencia;
@@ -42,7 +43,7 @@ public class TelaInicialAdminRestaurante extends Composite {
 		this.mainView = mainView;
 		
 		componenteAmbienteEscritorio = ComponenteAmbienteEscritorio.getInstance(mainView);
-//		componenteUsuarios = ComponenteUsuario.getInstance(mainView);				
+		componenteAvaliacao = ComponenteAvaliacao.getInstance(mainView);				
 //		componenteComunicados = ComponenteComunicados.getInstance(mainView);
 //		componenteOcorrencia = ComponenteOcorrencia.getInstance(mainView);
 //		componenteVisualizarCurso = new ComponenteVisualizarCurso();
@@ -64,7 +65,7 @@ public class TelaInicialAdminRestaurante extends Composite {
 //		grid.setWidget(1, 0, componenteConteudoProgramatico);
 //		grid.setWidget(1, 1, componenteTopico);
 		grid.setWidget(0, 0, componenteAmbienteEscritorio);
-//		grid.setWidget(0, 1, componenteUsuarios);
+		grid.setWidget(0, 1, componenteAvaliacao);
 //		grid.setWidget(0, 2, componenteComunicados);
 //		grid.setWidget(1, 0, componenteOcorrencia);
 //		grid.setWidget(1, 1, componenteDiarioCoordenador);

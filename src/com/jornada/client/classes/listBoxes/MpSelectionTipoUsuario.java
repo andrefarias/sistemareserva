@@ -9,7 +9,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.jornada.client.service.GWTServiceUsuario;
 import com.jornada.shared.classes.TipoUsuario;
 
-public class MpSelectionTipoUsuario extends MpSelection {	
+public class MpSelectionTipoUsuario extends MpListBox {	
 	
 	private AsyncCallback<ArrayList<TipoUsuario>> callBackPopulateComboBox;
 	

@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
-import com.jornada.client.classes.widgets.suggestoracle.MpSuggestOracle;
+import com.jornada.client.classes.widgets.suggestoracle.MpSuggestOracleList;
 
 public class MpImageHelper extends Image {
 
@@ -31,7 +31,7 @@ public class MpImageHelper extends Image {
         this.listBox = list;        
        
 //        MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
-        MpSuggestOracle oracle = new MpSuggestOracle(listBox);
+        MpSuggestOracleList oracle = new MpSuggestOracleList(listBox);
         defaults = new ArrayList<String>();
         box = new SuggestBox(oracle);
 

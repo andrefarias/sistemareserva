@@ -40,7 +40,7 @@ public interface TextConstants extends Messages {
     String menuTokenFerramentaCoordenadorUsuario();
     String menuTokenFerramentaCoordenadorDiario();
     String menuTokenFerramentaCoordenadorPresenca();
-    String menuTokenFerramentaCoordenadorRelatorio();
+    String menuTokenFerramentaAvaliacaoDeClientes();
     String menuTokenFerramentaCoordenadorBoletim();
     String menuTokenFerramentaCoordenadorRelatorioUsuario();
 	String menuTokenFerramentaSalao();

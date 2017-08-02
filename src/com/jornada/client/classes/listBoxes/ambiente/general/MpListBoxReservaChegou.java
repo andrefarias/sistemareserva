@@ -1,10 +1,10 @@
 package com.jornada.client.classes.listBoxes.ambiente.general;
 
-import com.jornada.client.classes.listBoxes.MpSelection;
+import com.jornada.client.classes.listBoxes.MpListBox;
 import com.jornada.shared.classes.Turno;
 
 
-public class MpListBoxReservaChegou extends MpSelection {
+public class MpListBoxReservaChegou extends MpListBox {
     
     Turno turno;
     

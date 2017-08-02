@@ -1,6 +1,6 @@
 package com.jornada.client.ambiente.administracao.reserva;
 
-import java.util.Date;      
+import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -9,14 +9,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 import com.jornada.client.ambiente.general.MpGridMsgReservaSaloes;
 import com.jornada.client.classes.listBoxes.MpListBoxSaloes;
 import com.jornada.client.classes.listBoxes.MpListBoxTurno;
@@ -83,7 +81,6 @@ public class AdicionarReserva extends VerticalPanel {
 
     }
 
-    @SuppressWarnings("deprecation")
     private AdicionarReserva(final TelaInicialReservaEscritorio telaInicialReserva) {
 
         txtConstants = GWT.create(TextConstants.class);
@@ -110,7 +107,7 @@ public class AdicionarReserva extends VerticalPanel {
         txtTelefone = new MpTextBox();
         txtObservacao = new MpTextBox();
         mpDateBoxDataAgenda = new MpDateBoxWithImage();
-        mpDateBoxDataAgenda.getDate().setFormat(new DefaultFormat(DateTimeFormat.getFullDateFormat()));
+//        mpDateBoxDataAgenda.getDate().setFormat(new DefaultFormat(DateTimeFormat.getFullDateFormat()));
 
         mpDateBoxDataAgenda.getDate().setValue(new Date());
         mpDateBoxDataAgenda.getDate().addValueChangeHandler(new MyDateValueChangeHandler());

@@ -74,9 +74,9 @@ public class MainMenu extends Composite implements ValueChangeHandler {
     private Hyperlink linkFerramentaCoordenadorDiario;
     private Image imgFerramentaCoordenadorDiario;         
     
-    public static final String MENU_TOKEN_FERRAMENTA_COORDENADOR_RELATORIO = txtConstants.menuTokenFerramentaCoordenadorRelatorio();
-    private Hyperlink linkFerramentaCoordenadorRelatorio;
-    private Image imgFerramentaCoordenadorRelatorio;  
+    public static final String MENU_TOKEN_FERRAMENTA_AVALIACAO_DE_CLIENTES = txtConstants.menuTokenFerramentaAvaliacaoDeClientes();
+    private Hyperlink linkFerramentaAvaliacaoDeClientes;
+    private Image imgFerramentaAvaliacaoDeClientes;  
     
     public static final String MENU_TOKEN_FERRAMENTA_COORDENADOR_PRESENCA = txtConstants.menuTokenFerramentaCoordenadorPresenca();
     private Hyperlink linkFerramentaCoordenadorPresenca;
@@ -98,106 +98,6 @@ public class MainMenu extends Composite implements ValueChangeHandler {
     private Hyperlink linkFerramentaSalaoReserva;
     private Image imgFerramentaSalaoReserva;      
     
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_NOTA = txtConstants.menuTokenFerramentaSalaoNota();
-//    private Hyperlink linkFerramentaSalaoNota;
-//    private Image imgFerramentaSalaoNota;  
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_CONTEUDO_PROGRAMATICO = txtConstants.menuTokenFerramentaSalaoConteudoProgramatico();
-//    private Hyperlink linkFerramentaSalaoConteudoProgramatico;
-//    private Image imgFerramentaSalaoConteudoProgramatico;
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_SALAO_TOPICO = txtConstants.menuTokenFerramentaSalaoTopico();
-//    private Hyperlink linkSalaoTopico;
-//    private Image imgSalaoTopico;
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_COMUNICADO = txtConstants.menuTokenFerramentaSalaoComunicado();
-//    private Hyperlink linkSalaoComunicado;
-//    private Image imgSalaoComunicado;   
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_OCORRENCIA = txtConstants.menuTokenFerramentaSalaoOcorrencia();
-//    private Hyperlink linkSalaoOcorrencia;
-//    private Image imgSalaoOcorrencia;       
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_HIERARQUIA = txtConstants.menuTokenFerramentaSalaoHierarquia();
-//    private Hyperlink linkFerramentaSalaoHierarquia;
-//    private Image imgFerramentaSalaoHierarquia;        
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_DIARIO = txtConstants.menuTokenFerramentaSalaoDiario();
-//    private Hyperlink linkFerramentaSalaoDiario;
-//    private Image imgFerramentaSalaoDiario;     
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_PRESENCA = txtConstants.menuTokenFerramentaSalaoPresenca();
-//    private Hyperlink linkFerramentaSalaoPresenca;
-//    private Image imgFerramentaSalaoPresenca;     
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_Salao_RELATORIO = txtConstants.menuTokenFerramentaSalaoRelatorio();
-//    private Hyperlink linkFerramentaSalaoRelatorio;
-//    private Image imgFerramentaSalaoRelatorio;       
-//    
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO = txtConstants.menuTokenFerramentaAluno();
-//    private Hyperlink linkFerramentaAluno;
-//    private Image imgFerramentaAluno;       
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_NOTA = txtConstants.menuTokenFerramentaAlunoNota();
-//    private Hyperlink linkFerramentaAlunoNota;
-//    private Image imgFerramentaAlunoNota;   
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_AGENDA = txtConstants.menuTokenFerramentaAlunoAgenda();
-//    private Hyperlink linkFerramentaAlunoAvaliacao;
-//    private Image imgFerramentaAlunoAvaliacao;          
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_COMUNICADO =txtConstants.menuTokenFerramentaAlunoComunicado();
-//    private Hyperlink linkFerramentaAlunoComunicado;
-//    private Image imgFerramentaAlunoComunicado;    
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_OCORRENCIA = txtConstants.menuTokenFerramentaAlunoOcorrencia();
-//    private Hyperlink linkAlunoOcorrencia;
-//    private Image imgAlunoOcorrencia;     
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_HIERARQUIA = txtConstants.menuTokenFerramentaAlunoHierarquia();
-//    private Hyperlink linkFerramentaAlunoHierarquia;
-//    private Image imgFerramentaAlunoHierarquia;        
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_DIARIO = txtConstants.menuTokenFerramentaAlunoDiario();
-//    private Hyperlink linkFerramentaAlunoDiario;
-//    private Image imgFerramentaAlunoDiario;        
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_PRESENCA = txtConstants.menuTokenFerramentaAlunoPresenca();
-//    private Hyperlink linkFerramentaAlunoPresenca;
-//    private Image imgFerramentaAlunoPresenca;   
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS = txtConstants.menuTokenFerramentaPais();
-//    private Hyperlink linkFerramentaPais;
-//    private Image imgFerramentaPais;     
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS_AGENDA = txtConstants.menuTokenFerramentaPaisAgenda();
-//    private Hyperlink linkFerramentaPaisAvaliacao;
-//    private Image imgFerramentaPaisAvaliacao;    
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS_COMUNICADO = txtConstants.menuTokenFerramentaPaisComunicado();
-//    private Hyperlink linkFerramentaPaisComunicado;
-//    private Image imgFerramentaPaisComunicado;      
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS_OCORRENCIA = txtConstants.menuTokenFerramentaPaisOcorrencia();
-//    private Hyperlink linkPaisOcorrencia;
-//    private Image imgPaisOcorrencia;      
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS_NOTA = txtConstants.menuTokenFerramentaPaisNota();
-//    private Hyperlink linkFerramentaPaisNota;
-//    private Image imgFerramentaPaisNota;   
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS_HIERARQUIA = txtConstants.menuTokenFerramentaPaisHierarquia();
-//    private Hyperlink linkFerramentaPaisHierarquia;
-//    private Image imgFerramentaPaisHierarquia; 
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_PAIS_DIARIO = txtConstants.menuTokenFerramentaPaisDiario();
-//    private Hyperlink linkFerramentaPaisDiario;
-//    private Image imgFerramentaPaisDiario;
-//    
-//    public static final String MENU_TOKEN_FERRAMENTA_ALUNO_PAIS_PRESENCA = txtConstants.menuTokenFerramentaAlunoPaisPresenca();
-//    private Hyperlink linkFerramentaAlunoPaisPresenca;
-//    private Image imgFerramentaAlunoPaisPresenca;   
 
 
     
@@ -265,18 +165,6 @@ public class MainMenu extends Composite implements ValueChangeHandler {
 			mainView.openAdminRestauranteEscritorio(MENU_TOKEN_FERRAMENTA_COORDENADOR_CURSO_ADMIN);		
 			
 		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_CURSO)) {
-//				
-//				this.linkPaginaPrincipal(true);
-//				this.linkFerramentaCoordenador(true);
-//				this.linkFerramentaCoordenadorCursoAdmin(true);
-//				this.linkFerramentaCoordenadorCurso();
-//				 if(isFirstEventFire == true){
-//					 isFirstEventFire = false;
-//					 mainView.openCadastroCurso(MENU_TOKEN_FERRAMENTA_COORDENADOR_CURSO);
-//				 }
-//				
-//		} 
 		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_RESERVA)) {
 				
 				this.linkPaginaPrincipal(true);
@@ -298,66 +186,17 @@ public class MainMenu extends Composite implements ValueChangeHandler {
 //                mainView.openCadastroDisciplina(MENU_TOKEN_FERRAMENTA_COORDENADOR_DISCIPLINA);
             }
         } 
-//        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_CONTEUDO_PROGRAMATICO)) {
-//				this.linkPaginaPrincipal(true);
-//				this.linkFerramentaCoordenador(true);
+        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_AVALIACAO_DE_CLIENTES)) {
+				this.linkPaginaPrincipal(true);
+				this.linkFerramentaCoordenador(true);
 //				this.linkFerramentaCoordenadorCursoAdmin(true);
-//				this.linkFerramentaCoordenadorConteudoProgramatico();
-//				if (isFirstEventFire == true) {
-//					isFirstEventFire = false;
-//					mainView.openCadastroConteudoProgramatico(MENU_TOKEN_FERRAMENTA_COORDENADOR_CONTEUDO_PROGRAMATICO);
-//				}	
-//		}	
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_TOPICO)) {
-//
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaCoordenador(true);
-//			this.linkFerramentaCoordenadorCursoAdmin(true);
-//			this.linkFerramentaCoordenadorTopico();
-//	
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openCadastroAdminTopico(MENU_TOKEN_FERRAMENTA_COORDENADOR_TOPICO);
-//			}				
-//			
-//		}	
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_HIERARQUIA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaCoordenador(true);
-//			this.linkFerramentaCoordenadorHierarquia();
-//			mainView.openCadastroAdminHierarquia(MENU_TOKEN_FERRAMENTA_COORDENADOR_HIERARQUIA);
-//		}			
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_USUARIO)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaCoordenador(true);
-//			this.linkFerramentaCoordenadorUsuario();
-//			mainView.openCadastroUsuario(MENU_TOKEN_FERRAMENTA_COORDENADOR_USUARIO);	
-//		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_COMUNICADO)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaCoordenador(true);
-//			this.linkFerramentaCoordenadorComunicados();
-//			mainView.openCadastroComunicado(MENU_TOKEN_FERRAMENTA_COORDENADOR_COMUNICADO);	
-//		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_OCORRENCIA)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaCoordenador(true);
-//			this.linkFerramentaCoordenadorOcorrencia();
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openCadastroCoordenadorOcorrencia(MENU_TOKEN_FERRAMENTA_COORDENADOR_OCORRENCIA);
-//			}	
-//		}				
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_DIARIO)) {
-//		
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaCoordenador(true);
-//			this.linkFerramentaCoordenadorDiario();
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaCoordenadorDiario(MENU_TOKEN_FERRAMENTA_COORDENADOR_DIARIO);
-//			}
-//		}				
+				this.linkFerramentaAvaliacaoDeClientes(false);
+				if (isFirstEventFire == true) {
+					isFirstEventFire = false;
+					mainView.openAvaliacaoDeClientes(MENU_TOKEN_FERRAMENTA_AVALIACAO_DE_CLIENTES);
+				}	
+		}	
+		
 //        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_COORDENADOR_PRESENCA)) {
 //            this.linkPaginaPrincipal(true);         
 //            this.linkFerramentaCoordenador(true);
@@ -430,241 +269,14 @@ public class MainMenu extends Composite implements ValueChangeHandler {
 				mainView.openFerramentaSalaoReserva(MENU_TOKEN_FERRAMENTA_SALAO_RESERVA);
 			}		
 		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_NOTA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaSalao(true);
-//			this.linkFerramentaSalaoNota();		
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaSalaoNota(MENU_TOKEN_FERRAMENTA_Salao_NOTA);
-//			}				
-//			
-//		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_CONTEUDO_PROGRAMATICO)) {
-//             this.linkPaginaPrincipal(true);
-//             this.linkFerramentaSalao(true);
-//             this.linkFerramentaSalaoConteudoProgramatico();
-//
-//             if (isFirstEventFire == true) {
-//                 isFirstEventFire = false;
-//                 mainView.openCadastroSalaoConteudoProgramatico(MENU_TOKEN_FERRAMENTA_Salao_CONTEUDO_PROGRAMATICO);
-//             }               
-//         
-//        }   
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_TOPICO)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaSalao(true);
-//			this.linkSalaoTopico();
-//				
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openCadastroSalaoTopico(MENU_TOKEN_FERRAMENTA_Salao_TOPICO);
-//			}	
-//		}	
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_COMUNICADO)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaSalao(true);
-//			this.linkSalaoComunicado();
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openSalaoComunicado(MENU_TOKEN_FERRAMENTA_Salao_COMUNICADO);
-//			}					
-//		}				
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_OCORRENCIA)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaSalao(true);
-//			this.linkSalaoOcorrencia();
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openCadastroSalaoOcorrencia(MENU_TOKEN_FERRAMENTA_Salao_OCORRENCIA);
-//			}	
-//				
-//		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_HIERARQUIA)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaSalao(true);
-//			this.linkFerramentaSalaoHierarquia();			
-//			mainView.openFerramentaSalaoHierarquia(MENU_TOKEN_FERRAMENTA_Salao_HIERARQUIA);
-//		}	
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_DIARIO)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaSalao(true);
-//			this.linkFerramentaSalaoDiario();		
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaSalaoDiario(MENU_TOKEN_FERRAMENTA_Salao_DIARIO);
-//			}
-//		}	
-//        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_PRESENCA)) {
-//            this.linkPaginaPrincipal(true);         
-//            this.linkFerramentaSalao(true);
-//            this.linkFerramentaSalaoPresenca();       
-//            
-//            if (isFirstEventFire == true) {
-//                isFirstEventFire = false;
-//                mainView.openFerramentaSalaoPresenca(MENU_TOKEN_FERRAMENTA_Salao_PRESENCA);
-//            }
-//        }   		
-//        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_Salao_RELATORIO)) {
-//            this.linkPaginaPrincipal(true);         
-//            this.linkFerramentaSalao(true);
-//            this.linkFerramentaSalaoRelatorio();    
-//            
-//            if (isFirstEventFire == true) {
-//                isFirstEventFire = false;
-//                mainView.openFerramentaSalaoRelatorio(MENU_TOKEN_FERRAMENTA_Salao_RELATORIO);
-//            }
-//        }   		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaAluno(false);
-//			mainView.openFerramentaAluno(MENU_TOKEN_FERRAMENTA_ALUNO);
-//		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_NOTA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaAluno(true);
-//			this.linkFerramentaAlunoNota();			
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaAlunoNota(MENU_TOKEN_FERRAMENTA_ALUNO_NOTA);
-//			}
-//		}	
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_AGENDA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaAluno(true);
-//			this.linkFerramentaAlunoAgenda();			
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaAlunoAgenda(MENU_TOKEN_FERRAMENTA_ALUNO_AGENDA);
-//			}
-//
-//		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_COMUNICADO)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaAluno(true);
-//			this.linkFerramentaAlunoComunicado();			
-//			mainView.openFerramentaAlunoComunicado(MENU_TOKEN_FERRAMENTA_ALUNO_COMUNICADO);
-//		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_OCORRENCIA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaAluno(true);
-//			this.linkAlunoOcorrencia();
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openCadastroAlunoOcorrencia(MENU_TOKEN_FERRAMENTA_ALUNO_OCORRENCIA);
-//			}
-//		}			
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_HIERARQUIA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaAluno(true);
-//			this.linkFerramentaAlunoHierarquia();			
-//			mainView.openFerramentaAlunoHierarquia(MENU_TOKEN_FERRAMENTA_ALUNO_HIERARQUIA);
-//		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_DIARIO)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaAluno(true);
-//			this.linkFerramentaAlunoDiario();			
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaAlunoDiario(MENU_TOKEN_FERRAMENTA_ALUNO_DIARIO);
-//			}
-//		}
-//        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_PRESENCA)) {
-//            this.linkPaginaPrincipal(true);         
-//            this.linkFerramentaAluno(true);
-//            this.linkFerramentaAlunoPresenca();       
-//            
-//            if (isFirstEventFire == true) {
-//                isFirstEventFire = false;
-//                mainView.openFerramentaAlunoPresenca(MENU_TOKEN_FERRAMENTA_ALUNO_PRESENCA);
-//            }
-//        }  
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaPais(false);
-//			mainView.openFerramentaPais(MENU_TOKEN_FERRAMENTA_PAIS);
-//		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS_AGENDA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaPais(true);
-//			this.linkFerramentaPaisAgenda();			
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaPaisAgenda(MENU_TOKEN_FERRAMENTA_PAIS_AGENDA);
-//			}
-//		}			
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS_COMUNICADO)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaPais(true);
-//			this.linkFerramentaPaisComunicado();			
-//			mainView.openFerramentaPaisComunicado(MENU_TOKEN_FERRAMENTA_PAIS_COMUNICADO);
-//		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS_NOTA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaPais(true);
-//			this.linkFerramentaPaisNota();			
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaPaisNota(MENU_TOKEN_FERRAMENTA_PAIS_NOTA);
-//			}
-//		}	
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS_OCORRENCIA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaPais(true);
-//			this.linkPaisOcorrencia();
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openCadastroPaisOcorrencia(MENU_TOKEN_FERRAMENTA_PAIS_OCORRENCIA);
-//			}
-//		}		
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS_HIERARQUIA)) {
-//			this.linkPaginaPrincipal(true);
-//			this.linkFerramentaPais(true);
-//			this.linkFerramentaPaisHierarquia();			
-//			mainView.openFerramentaPaisHierarquia(MENU_TOKEN_FERRAMENTA_PAIS_HIERARQUIA);
-//		}
-//		else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_PAIS_DIARIO)) {
-//			this.linkPaginaPrincipal(true);			
-//			this.linkFerramentaPais(true);
-//			this.linkFerramentaPaisDiario();			
-//			
-//			if (isFirstEventFire == true) {
-//				isFirstEventFire = false;
-//				mainView.openFerramentaPaisDiario(MENU_TOKEN_FERRAMENTA_PAIS_DIARIO);
-//			}
-//		}	
-//        else if (History.getToken().equals(MENU_TOKEN_FERRAMENTA_ALUNO_PAIS_PRESENCA)) {
-//            this.linkPaginaPrincipal(true);         
-//            this.linkFerramentaPais(true);
-//            this.linkFerramentaAlunoPaisPresenca();
-//            
-//            if (isFirstEventFire == true) {
-//                isFirstEventFire = false;
-//                mainView.openFerramentaAlunoPaisPresenca(MENU_TOKEN_FERRAMENTA_ALUNO_PAIS_PRESENCA);
-//            }
-//        }  
+
 		else{
 
 			this.linkPaginaPrincipal(false);
 			
 			int idTipoUser = mainView.getUsuarioLogado().getIdTipoUsuario();
 			
-//			if(mainView.getUsuarioLogado().getIdTipoUsuario() == TipoUsuario.ALUNO){
-//				this.linkFerramentaAluno(false);
-//			}
-//			else if(mainView.getUsuarioLogado().getIdTipoUsuario() == TipoUsuario.PAIS){
-//				this.linkFerramentaPais(false);
-//			}
-//			else 
+
 			    if(idTipoUser == TipoUsuario.SALAO){
 				this.linkFerramentaSalao(false);
 			}
@@ -874,14 +486,14 @@ public class MainMenu extends Composite implements ValueChangeHandler {
         hPanel.add(linkFerramentaCoordenadorPresenca);
     }	
 	
-    public void linkFerramentaCoordenadorRelatorio(boolean showConnectionLabel){
-        imgFerramentaCoordenadorRelatorio = new Image("images/product_documentation-16.png");
-        linkFerramentaCoordenadorRelatorio = new Hyperlink(txtConstants.relatorios(), txtConstants.menuTokenFerramentaCoordenadorRelatorio());
-        linkFerramentaCoordenadorRelatorio.setStyleName("a");
+    public void linkFerramentaAvaliacaoDeClientes(boolean showConnectionLabel){
+        imgFerramentaAvaliacaoDeClientes = new Image("images/product_documentation-16.png");
+        linkFerramentaAvaliacaoDeClientes = new Hyperlink("Avaliação de Clientes", txtConstants.menuTokenFerramentaAvaliacaoDeClientes());
+        linkFerramentaAvaliacaoDeClientes.setStyleName("a");
         
-        hPanel.add(imgFerramentaCoordenadorRelatorio);
+        hPanel.add(imgFerramentaAvaliacaoDeClientes);
         hPanel.add(new InlineHTML("&nbsp"));
-        hPanel.add(linkFerramentaCoordenadorRelatorio);
+        hPanel.add(linkFerramentaAvaliacaoDeClientes);
         
         if(showConnectionLabel==true){
             this.connectionLabel();

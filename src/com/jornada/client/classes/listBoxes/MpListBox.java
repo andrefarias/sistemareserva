@@ -5,7 +5,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.jornada.client.classes.widgets.dialog.MpDialogBoxRefreshPage;
 import com.jornada.client.content.i18n.TextConstants;
 
-public class MpSelection extends ListBox{
+public class MpListBox extends ListBox{
 	
 	
 	protected static TextConstants txtConstants = GWT.create(TextConstants.class);
@@ -13,9 +13,9 @@ public class MpSelection extends ListBox{
 	protected static String CARREGANDO = txtConstants.geralCarregando();
 	protected static String ERRO_POPULAR = txtConstants.erroPopularCombobox();
 	
-	public MpSelection(){		
+	public MpListBox(){		
 		setStyleName("design_list_boxes");
-		setWidth("350px");	
+		setWidth("150px");	
 	}
 	
 	

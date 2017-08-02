@@ -8,15 +8,15 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 //import com.google.gwt.user.client.ui.SuggestOracle;
 
-public class MpSuggestOracle extends MultiWordSuggestOracle {
+public class MpSuggestOracleList extends MultiWordSuggestOracle {
 
     private List<String> data;
 
-    public MpSuggestOracle(List<String> data) {
+    public MpSuggestOracleList(List<String> data) {
         this.data = data;
     }
     
-    public MpSuggestOracle(ListBox listBox) {
+    public MpSuggestOracleList(ListBox listBox) {
         List<String> data = new ArrayList<String>();
         for (int i=0;i<listBox.getItemCount();i++) {
             data.add(listBox.getItemText(i));            

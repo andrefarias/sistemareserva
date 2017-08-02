@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.jornada.client.classes.listBoxes.MpSelection;
+import com.jornada.client.classes.listBoxes.MpListBox;
 import com.jornada.client.classes.widgets.button.MpImageButton;
 import com.jornada.client.classes.widgets.dialog.MpDialogBox;
 import com.jornada.client.classes.widgets.panel.MpPanelLoading;
@@ -24,7 +24,7 @@ public class DialogBoxIdioma extends DialogBox {
 	
 	TextConstants txtConstants = GWT.create(TextConstants.class);
 	
-	MpSelection listBoxIdiomas;
+	MpListBox listBoxIdiomas;
 	
 	private Usuario usuario;
 	
@@ -63,7 +63,7 @@ public class DialogBoxIdioma extends DialogBox {
 		Label lblIdioma = new Label(txtConstants.idioma());
 		lblIdioma.setStyleName("design_label");
 		
-		listBoxIdiomas = new MpSelection();
+		listBoxIdiomas = new MpListBox();
 		listBoxIdiomas.setWidth("200px");		
 		listBoxIdiomas.addItem(txtConstants.idiomaIngles(), "en");
 		listBoxIdiomas.addItem(txtConstants.idiomaPortugues(), "pt_BR");

@@ -2,11 +2,13 @@ package com.jornada.client.classes.widgets.datebox;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLTable;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 import com.jornada.client.classes.widgets.panel.MpSpaceVerticalPanel;
 
 public class MpDateBoxWithImage extends Grid{
@@ -15,7 +17,8 @@ public class MpDateBoxWithImage extends Grid{
 	private DateBox date;
 	private Image img;
 	
-	public MpDateBoxWithImage(){
+	@SuppressWarnings("deprecation")
+    public MpDateBoxWithImage(){
 		
 		super(1,3);
 		
@@ -40,7 +43,7 @@ public class MpDateBoxWithImage extends Grid{
 		
 		HTMLTable.CellFormatter formatter = this.getCellFormatter();		
 		formatter.setHorizontalAlignment(0, 2, HasHorizontalAlignment.ALIGN_LEFT);
-		
+		 this.getDate().setFormat(new DefaultFormat(DateTimeFormat.getFullDateFormat()));
 	}
 	
 	

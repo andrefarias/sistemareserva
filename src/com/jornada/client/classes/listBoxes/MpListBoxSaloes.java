@@ -3,7 +3,7 @@ package com.jornada.client.classes.listBoxes;
 import com.jornada.shared.classes.salao.Saloes;
 
 
-public class MpListBoxSaloes extends MpSelection {   
+public class MpListBoxSaloes extends MpListBox {   
 
     
     public MpListBoxSaloes() {

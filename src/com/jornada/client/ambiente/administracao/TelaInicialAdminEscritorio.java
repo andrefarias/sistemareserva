@@ -63,8 +63,8 @@ public class TelaInicialAdminEscritorio extends Composite {
 		grid.setCellSpacing(3);
 		grid.setCellPadding(3);
 //		grid.setWidget(0, 0, componenteCurso);
-		grid.setWidget(0, 1, componenteReserva);
-//		grid.setWidget(0, 2, componenteDisciplina);
+//		grid.setWidget(0, 1, componenteReserva);
+//		grid.setWidget(0, 2, componenteAvaliacao);
 //		grid.setWidget(1, 0, componenteConteudoProgramatico);
 //		grid.setWidget(1, 1, componenteTopico);
 //		grid.setWidget(1, 2, componenteUsuarios);

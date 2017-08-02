@@ -3,7 +3,7 @@ package com.jornada.client.classes.listBoxes;
 import com.jornada.shared.classes.Turno;
 
 
-public class MpListBoxTurno extends MpSelection {
+public class MpListBoxTurno extends MpListBox {
     
     public MpListBoxTurno(){
         
