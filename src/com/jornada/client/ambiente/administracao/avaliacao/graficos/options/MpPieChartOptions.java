@@ -1,4 +1,4 @@
-package com.jornada.client.ambiente.administracao.avaliacao.graficos;
+package com.jornada.client.ambiente.administracao.avaliacao.graficos.options;
 
 //import com.google.gwt.visualization.client.visualizations.corechart.TextStyle;
 import com.googlecode.gwt.charts.client.corechart.PieChartOptions;
@@ -11,7 +11,7 @@ import com.googlecode.gwt.charts.client.options.TextStyle;
 
 public class MpPieChartOptions {
     
-    PieChartOptions options;
+    private PieChartOptions options;
     
     public MpPieChartOptions(String strLegend){
         // Set options
@@ -34,8 +34,8 @@ public class MpPieChartOptions {
         options.setPieSliceTextStyle(textStyle);
         options.setIs3D(false);
         options.setLegend(legend);
-        options.setWidth(400);
-        options.setHeight(250);
+        options.setWidth(380);
+        options.setHeight(240);
         options.setTitle(strLegend);
     }
 

@@ -4,7 +4,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -17,7 +16,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.jornada.client.classes.widgets.label.MpLabelError;
 import com.jornada.client.classes.widgets.panel.MpPanelLoading;
 import com.jornada.client.content.i18n.TextConstants;
-import com.jornada.client.service.GWTServiceUsuario;
 
 @SuppressWarnings("deprecation")
 public class MpDialogBoxExcel extends DecoratedPopupPanel implements ClickListener {
@@ -114,29 +112,29 @@ public class MpDialogBoxExcel extends DecoratedPopupPanel implements ClickListen
 		
 		dock.add(grid, DockPanel.SOUTH);
 
-		GWTServiceUsuario.Util.getInstance().gerarExcelUsuario(new AsyncCallback<String>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				mpPanelLoading.setVisible(false);
-				grid.getRowFormatter().setVisible(0, false);
-				grid.getRowFormatter().setVisible(1, false);
-				grid.getRowFormatter().setVisible(2, false);
-				grid.getRowFormatter().setVisible(3, true);
-			}
-
-			@Override
-			public void onSuccess(String result) {
-				
-				result = result.replace("//", "/");
-				anchor.setHref(GWT.getHostPageBaseURL()+result);
-				mpPanelLoading.setVisible(false);
-				grid.getRowFormatter().setVisible(0, false);
-				grid.getRowFormatter().setVisible(1, true);
-				grid.getRowFormatter().setVisible(2, true);
-				grid.getRowFormatter().setVisible(3, false);
-			}
-		});
+//		GWTServiceUsuario.Util.getInstance().gerarExcelUsuario(new AsyncCallback<String>() {
+//
+//			@Override
+//			public void onFailure(Throwable caught) {
+//				mpPanelLoading.setVisible(false);
+//				grid.getRowFormatter().setVisible(0, false);
+//				grid.getRowFormatter().setVisible(1, false);
+//				grid.getRowFormatter().setVisible(2, false);
+//				grid.getRowFormatter().setVisible(3, true);
+//			}
+//
+//			@Override
+//			public void onSuccess(String result) {
+//				
+//				result = result.replace("//", "/");
+//				anchor.setHref(GWT.getHostPageBaseURL()+result);
+//				mpPanelLoading.setVisible(false);
+//				grid.getRowFormatter().setVisible(0, false);
+//				grid.getRowFormatter().setVisible(1, true);
+//				grid.getRowFormatter().setVisible(2, true);
+//				grid.getRowFormatter().setVisible(3, false);
+//			}
+//		});
 		
 
 		super.setGlassEnabled(true);

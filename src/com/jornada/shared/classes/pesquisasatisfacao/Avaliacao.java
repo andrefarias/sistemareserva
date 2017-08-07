@@ -7,16 +7,52 @@ public class Avaliacao implements Serializable {
 
     private static final long serialVersionUID = 1434171353793443708L;
     
+    public static final String  STR_INTERNET =  "Internet";
+    public static final String  STR_AMIGOS_FAMILIARES =  "Amigos/Familiares";
+    public static final String  STR_JORNAL =  "Jornal";
+    public static final String  STR_OUTROS =  "Outros";
+    
+    public static final String STR_SIM="Sim";
+    public static final String STR_NAO="Não";
+    public static final String STR_TALVEZ="Talvez";
+    
+    public static final String STR_REST_MOQUEM = "Restaurante Moquem";
+    public static final String STR_AMBIENTE = "Ambiente";
+    public static final String STR_ATENDIMENTO = "Atendimento";
+    public static final String STR_QUALIDADE = "Qualidade";
+    public static final String STR_ESPACO_KIDS = "Espaço Kids / Recreação";    
+    public static final String STR_COZINHA = "Cozinha";    
+    
+    public static final String STR_COL_REST_MOQUEM = "rest_moquem";
+    public static final String STR_COL_AMBIENTE = "ambiente";
+    public static final String STR_COL_ATENDIMENTO = "atendimento";
+    public static final String STR_COL_QUALIDADE = "qualidade";
+    public static final String STR_COL_ESPACO_KIDS = "espaco_kids";    
+    public static final String STR_COL_COZINHA = "cozinha";   
+    
+    public static final String[] listColumnsServicos = {STR_COL_REST_MOQUEM,STR_COL_AMBIENTE, STR_COL_ATENDIMENTO, STR_COL_QUALIDADE, STR_COL_ESPACO_KIDS, STR_COL_COZINHA};
+   
+    public static final String STR_NOTA_EXCELENTE = "Excelente";
+    public static final String STR_NOTA_BOM = "Bom";
+    public static final String STR_NOTA_REGULAR = "Regular";
+    public static final String STR_NOTA_RUIM = "Ruim";
+    
+    public static final int INT_PESO_NOTA_EXCELENTE = 4;
+    public static final int INT_PESO_NOTA_BOM = 3;
+    public static final int INT_PESO_NOTA_REGULAR = 2;
+    public static final int INT_PESO_NOTA_RUIM = 1;
+    
+    public static final String[] listNotas = {STR_NOTA_EXCELENTE,STR_NOTA_BOM, STR_NOTA_REGULAR, STR_NOTA_RUIM};    
     
     public static final String STR_GRAFICO_CIDADE_COLUNA="Cidades - Gráfico Coluna";
     public static final String STR_GRAFICO_CIDADE_LINHA="Cidades - Gráfico Tendência";
     public static final String STR_GRAFICO_SOBRE_RESTAURANTE_TORTA="Sobre o Restaurante - Gráfico Torta";
     public static final String STR_GRAFICO_PESQUISA_SATISFACAO_TORTA="Pesquisa Satisfação - Gráfico Torta";
-    public static final String STR_GRAFICO_ATENDENTES="Pesquisa Satisfação - Gráfico Torta";
-    
+    public static final String STR_GRAFICO_ATENDENTES="Atendentes - Gráfico Torta";
+    public static final String STR_GRAFICO_LINHA_SERVICOS_REST="Serviços - Gráfico Tendência";    
     
     public static final String SEPARATE_DATA = "<separate-data>";
-
+    public static final String TODAS = "Todas";
     
     private int idAvaliacao; 
     private String restMoquem;    
@@ -164,6 +200,14 @@ public class Avaliacao implements Serializable {
 
     public void setAtendente(String atendente) {
         this.atendente = atendente;
+    }
+
+    public static String[] getListNotas() {
+        return listNotas;
+    }
+
+    public static String[] getListColumnsServicos() {
+        return listColumnsServicos;
     }
     
  

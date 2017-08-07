@@ -15,7 +15,6 @@ import com.googlecode.gwt.charts.client.options.HAxis;
 import com.googlecode.gwt.charts.client.options.Legend;
 import com.googlecode.gwt.charts.client.options.LegendPosition;
 import com.googlecode.gwt.charts.client.options.VAxis;
-import com.jornada.server.classes.AvaliacaoServer;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
 
 public class GraficoColunaCidade {

@@ -21,6 +21,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
+import com.jornada.shared.classes.pesquisasatisfacao.MediaServico;
 
 @RemoteServiceRelativePath("GWTServiceAvaliacao")
 public interface GWTServiceAvaliacao extends RemoteService {
@@ -30,9 +31,12 @@ public interface GWTServiceAvaliacao extends RemoteService {
     
     public String adicionarAvaliacao(Avaliacao avaliacao);
     
-    public ArrayList<String> getGraficoColunaCidade(Date dataInicial, Date dataFinal);
-    public ArrayList<ArrayList<String>> getGraficoSobreRestaurante(Date dataInicial, Date dataFinal);
-    public ArrayList<ArrayList<String>> getGraficoPesquisaSatisfacao(Date dataInicial, Date dataFinal);
+    public ArrayList<String> getGraficoColunaCidade(String strCidade, Date dataInicial, Date dataFinal);
+    public ArrayList<ArrayList<String>> getGraficoSobreRestaurante(String strCidade, Date dataInicial, Date dataFinal);
+    public ArrayList<ArrayList<String>> getGraficoPesquisaSatisfacao(String strCidade, Date dataInicial, Date dataFinal);
+    public ArrayList<String> getGraficoAtendentes(String strCidade,String strAtendente, Date dataInicial, Date dataFinal);
+    public ArrayList<String> getCidades();
+    public ArrayList<ArrayList<MediaServico>> getGraficoServicos(String strCidade, String strEscala, Date dataInicial, Date dataFinal);
     
 	public static class Util {
 		private static GWTServiceAvaliacaoAsync instance;

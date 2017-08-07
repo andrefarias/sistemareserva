@@ -9,6 +9,7 @@ import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.PieChart;
+import com.jornada.client.ambiente.administracao.avaliacao.graficos.options.MpPieChartOptions;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
 
 public class GraficoTortaSobreRest {
@@ -58,6 +59,8 @@ public class GraficoTortaSobreRest {
                   list = arrayList.get(0);                
                   int intMostrarApenas = (intMostrarItens > list.size()) ? list.size() : intMostrarItens;  
                   
+                  String[] strColorsComoConheceuRest = {"gray", "gray", "gray", "gray"};
+                  
                   // Prepare the data
                   DataTable dataTable = DataTable.create();               
 
@@ -68,10 +71,11 @@ public class GraficoTortaSobreRest {
                       String cell = list.get(row);
 
                       String[] strData = cell.split(Avaliacao.SEPARATE_DATA);
+                      strColorsComoConheceuRest = getColorsConheceuRest(strColorsComoConheceuRest, strData[0], row);
                       dataTable.setValue(row, 0, strData[0]);
                       dataTable.setValue(row, 1, Double.parseDouble(strData[1]));
                   }
-
+                  optionsComoConheceuRest.getOptions().setColors(strColorsComoConheceuRest);
                   chartTortaComoConheceuRest.draw(dataTable, optionsComoConheceuRest.getOptions());
                   chartTortaComoConheceuRest.onResize();
                   chartTortaComoConheceuRest.redraw();
@@ -148,14 +152,29 @@ public class GraficoTortaSobreRest {
     
     
     public static String[] getColors(String[] strColors, String strText, int cv){
-        if(strText.equals("Sim")){
+        if(strText.equals(Avaliacao.STR_SIM)){
             strColors[cv]="#4caf4e";
-        }else if (strText.equals("Não")){
+        }else if (strText.equals(Avaliacao.STR_NAO)){
             strColors[cv]="#e53935";
-        }else if(strText.equals("Talvez")){
+        }else if(strText.equals(Avaliacao.STR_TALVEZ)){
             strColors[cv]="#fff9c4";
         }else{
             strColors[cv]="#ffab91";
+        }
+        return strColors;
+    }
+    
+    
+    public static String[] getColorsConheceuRest(String[] strColors, String strText, int cv){
+        if(strText.equals(Avaliacao.STR_AMIGOS_FAMILIARES)){
+//            strColors[cv]="#4caf4e";
+            strColors[cv]="#6ec870";
+        }else if (strText.equals(Avaliacao.STR_INTERNET)){
+            strColors[cv]="#95b3d7";
+        }else if(strText.equals(Avaliacao.STR_JORNAL)){
+            strColors[cv]="#376091";
+        }else if(strText.equals(Avaliacao.STR_OUTROS)){
+            strColors[cv]="#fff9c4";
         }
         return strColors;
     }

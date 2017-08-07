@@ -48,13 +48,10 @@ public class GWTServiceUsuarioImpl extends RemoteServiceServlet implements GWTSe
 	}	
 	
 	
-	public String gerarExcelUsuario(){
-		return UsuarioServer.gerarExcelUsuario();
-	}
-	
-//	public ArrayList<UsuarioErroImportar> importarUsuariosUsandoExcel(String excelFile){
-//		return UsuarioServer.importarUsuariosUsandoExcel(excelFile);
+//	public String gerarExcelUsuario(){
+//		return UsuarioServer.gerarExcelUsuario();
 //	}
+
 	
 	public ArrayList<Usuario> getUsuarios() {		
 		return UsuarioServer.getUsuarios();
@@ -68,39 +65,27 @@ public class GWTServiceUsuarioImpl extends RemoteServiceServlet implements GWTSe
 		return UsuarioServer.getUsuarios(strFilter);
 	}	
 	
-	public ArrayList<Usuario> getUsuarios(String strDBField, String strFilter) {	
-		
-		if(strFilter.length()==2){
-//			return UsuarioServer.getUsuarios();
-		    return UsuarioServer.getTodosUsuarios();
-		}else{
-//			return UsuarioServer.getUsuarios(strDBField, strFilter);
-		    return UsuarioServer.getUsuariosFieldLike(strDBField, strFilter);
-		}
-		
-	}		
+//	public ArrayList<Usuario> getUsuarios(String strDBField, String strFilter) {	
+//		
+//		if(strFilter.length()==2){
+////			return UsuarioServer.getUsuarios();
+//		    return UsuarioServer.getTodosUsuarios();
+//		}else{
+////			return UsuarioServer.getUsuarios(strDBField, strFilter);
+//		    return UsuarioServer.getUsuariosFieldLike(strDBField, strFilter);
+//		}
+//		
+//	}		
 	
-	public ArrayList<Usuario> getAlunosPorCurso(int idCurso, String strFiltroUsuario) {				
-		return UsuarioServer.getAlunosPorCurso(idCurso, strFiltroUsuario);
-	}	
-	
-	
-	
- 
-    
 
-	public ArrayList<Usuario> getAlunosPorCurso(int idCurso) {				
-		return UsuarioServer.getAlunosPorCurso(idCurso);
-	}	
-	
 
 	public ArrayList<Usuario> getUsuariosPorTipoUsuario(int id_tipo_usuario, String strFilter) {				
 		return UsuarioServer.getUsuariosPorTipoUsuario(id_tipo_usuario, strFilter);
 	}		
 	
-	public ArrayList<Usuario> getUsuariosPorTipoUsuario(int id_tipo_usuario) {				
-		return UsuarioServer.getUsuariosPorTipoUsuario(id_tipo_usuario);
-	}
+//	public ArrayList<Usuario> getUsuariosPorTipoUsuario(int id_tipo_usuario) {				
+//		return UsuarioServer.getUsuariosPorTipoUsuario(id_tipo_usuario);
+//	}
 
  
    
@@ -110,75 +95,18 @@ public class GWTServiceUsuarioImpl extends RemoteServiceServlet implements GWTSe
 		return UsuarioServer.getTipoUsuarios();
 	}
 	
-//	public boolean associarPaisAoAluno(int id_aluno,ArrayList<String> list_id_pais){		
-//		return UsuarioServer.associarPaisAoAluno(id_aluno, list_id_pais);
-//	}	
-	
-	public ArrayList<Usuario> getTodosOsPaisDoAluno(int id_aluno){		
-		return UsuarioServer.getTodosOsPaisDoAluno(id_aluno);	
-	}	
-	
+
 	
 	public Usuario getUsuarioPeloId(int idUsuario){
 		return UsuarioServer.getUsuarioPeloId(idUsuario);
 	}
-	
-	
-	public ArrayList<Usuario> getPaisPorCurso(int idCurso, String strFilterResp, String strFilterName){
-		
-		return UsuarioServer.getPaisPorCurso(idCurso, strFilterResp,strFilterName);
-	}
-	
-	public ArrayList<Usuario> getTodosPais(String strFilterResp, String strFilterName){
-	    return UsuarioServer.getTodosPais(strFilterResp, strFilterName);
-	}
-	
-//    public ArrayList<ProfessorDisciplinaRelatorio> getProfessoresDisciplinas() {
-//        return UsuarioServer.getProfessoresDisciplinas();
-//    }
-//    
-    
-    public String getExcelProfessoresDisciplinas(){
-        return UsuarioServer.getExcelProfessoresDisciplinas();
-    }
-
-//    @Override
-//    public ArrayList<UsuarioNomeID> getAlunosTodosOuPorCurso(int idCurso, int idUnidade, boolean showAluno, boolean showPais, boolean showProfessor) {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
 
     @Override
-    public ArrayList<Usuario> getUsuariosPorCursoAmbientePai(Usuario usuarioPai, int idCurso) {
-        // TODO Auto-generated method stub
-        return null;
+    public ArrayList<String> getAtendentes() {
+        return UsuarioServer.getAtendentes();
     }
 
-    @Override
-    public ArrayList<Usuario> getFilhoDoPaiAmbientePais(Usuario usuarioPai) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-//
-//    @Override
-//    public ArrayList<UsuarioNomeID> getCoordenadoresAdministradoresNomeId(int idUnidade) {
-//        // TODO Auto-generated method stub
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean associarPaisAoAluno(int id_aluno, ArrayList<String> list_id_pais) {
-//        // TODO Auto-generated method stub
-//        return false;
-//    }
-//    
 
-//    @Override
-//    public boolean associarPaisAoAluno(int id_aluno, ArrayList<String> list_id_pais) {
-//        // TODO Auto-generated method stub
-//        return false;
-//    }
-    
 
 
 }

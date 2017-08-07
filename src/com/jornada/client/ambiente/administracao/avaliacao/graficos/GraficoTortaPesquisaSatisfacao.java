@@ -9,6 +9,7 @@ import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.PieChart;
+import com.jornada.client.ambiente.administracao.avaliacao.graficos.options.MpPieChartOptions;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
 
 public class GraficoTortaPesquisaSatisfacao {
@@ -244,13 +245,13 @@ public class GraficoTortaPesquisaSatisfacao {
     
     
     public static String[] getColors(String[] strColors, String strText, int cv){
-        if(strText.equals("Excelente")){
+        if(strText.equals(Avaliacao.STR_NOTA_EXCELENTE)){
             strColors[cv]="#4caf4e";
-        }else if (strText.equals("Bom")){
+        }else if (strText.equals(Avaliacao.STR_NOTA_BOM)){
             strColors[cv]="#6ec870";
-        }else if(strText.equals("Regular")){
+        }else if(strText.equals(Avaliacao.STR_NOTA_REGULAR)){
             strColors[cv]="#fff9c4";
-        }else if(strText.equals("Ruim")){
+        }else if(strText.equals(Avaliacao.STR_NOTA_RUIM)){
             strColors[cv]="#e53935";
         }else{
             strColors[cv]="lightGray";
