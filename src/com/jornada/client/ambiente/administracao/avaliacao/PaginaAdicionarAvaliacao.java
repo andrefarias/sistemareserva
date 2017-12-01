@@ -318,7 +318,7 @@ public class PaginaAdicionarAvaliacao extends VerticalPanel {
                 avaliacao.setData(mpDateBoxDataAvaliacao.getDate().getValue());
                 avaliacao.setEmail(txtEmail.getText());                
                 avaliacao.setTelefone(txtTelefone.getText());
-                avaliacao.setSugestao(txtSugestao.getText());
+                avaliacao.setObs(txtSugestao.getText());
                 avaliacao.setAtendente(txtAtendente.getText());
 
 
@@ -374,7 +374,7 @@ public class PaginaAdicionarAvaliacao extends VerticalPanel {
         listBoxComoConheceuRest.setSelectedIndex(0);
         listBoxVoltariaRest.setSelectedIndex(0);
         txtCidade.setValue("");
-        mpDateBoxDataAvaliacao.getDate().setValue(new Date());
+//        mpDateBoxDataAvaliacao.getDate().setValue(new Date());
         txtEmail.setValue("");           
         txtTelefone.setValue("");
         txtSugestao.setValue("");

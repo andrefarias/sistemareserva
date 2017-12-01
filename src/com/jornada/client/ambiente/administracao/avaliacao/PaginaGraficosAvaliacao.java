@@ -15,8 +15,10 @@ import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoColunaCidade;
+import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoColunaObs;
 import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoLinhaServicosRestaurante;
 import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoTortaAtendentes;
+import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoTortaObs;
 import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoTortaPesquisaSatisfacao;
 import com.jornada.client.ambiente.administracao.avaliacao.graficos.GraficoTortaSobreRest;
 import com.jornada.client.classes.listBoxes.MpListBox;
@@ -89,7 +91,10 @@ public class PaginaGraficosAvaliacao extends VerticalPanel {
         listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_SOBRE_RESTAURANTE_TORTA);
         listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_PESQUISA_SATISFACAO_TORTA);
         listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_ATENDENTES);
-        listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_LINHA_SERVICOS_REST);        
+        listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_LINHA_SERVICOS_REST);   
+        listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_OBS_COLUNA);  
+        listBoxTipoDeGraficos.addItem(Avaliacao.STR_GRAFICO_OBS_TORTA);  
+        
         listBoxTipoDeGraficos.addChangeHandler(new MpTipoDeGraficosChangeHandler());
 
         listBoxMostarApenas = new MpListBox();
@@ -246,7 +251,16 @@ public class PaginaGraficosAvaliacao extends VerticalPanel {
             String strEscala = listBoxEscala.getSelectedValue();
             GWTServiceAvaliacao.Util.getInstance().getGraficoServicos(strCidade, strEscala, dataInicial, dataFinal, new callbackGraficosLinhaServicos());
         }
+        if (strGrafico.equals(Avaliacao.STR_GRAFICO_OBS_COLUNA)) { 
+//            String strEscala = listBoxEscala.getSelectedValue();
+            GWTServiceAvaliacao.Util.getInstance().getGraficoColunaObs(strCidade, dataInicial, dataFinal, new callbackGraficosColunaObs());
+        }
         
+        
+        if (strGrafico.equals(Avaliacao.STR_GRAFICO_OBS_TORTA)) { 
+//          String strEscala = listBoxEscala.getSelectedValue();
+          GWTServiceAvaliacao.Util.getInstance().getGraficoColunaObs(strCidade, dataInicial, dataFinal, new callbackGraficosTortaObs());
+      }
     }
 
     private class callbackGraficosColunaCidade implements AsyncCallback<ArrayList<String>> {
@@ -263,6 +277,43 @@ public class PaginaGraficosAvaliacao extends VerticalPanel {
             mpLoading.setVisible(false);
             int intMostrarItens = Integer.parseInt(listBoxMostarApenas.getSelectedValue());
             GraficoColunaCidade.drawChart(getFlexTableGrafico(), result, intMostrarItens);
+        }
+
+    }
+    
+    private class callbackGraficosColunaObs implements AsyncCallback<ArrayList<String>> {
+
+        public void onFailure(Throwable caught) {
+            mpLoading.setVisible(false);
+            mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
+            mpDialogBoxWarning.setBodyText("Gráfico não pode ser carregado corretamente");
+            mpDialogBoxWarning.showDialog();
+        }
+
+        @Override
+        public void onSuccess(ArrayList<String> result) {
+            mpLoading.setVisible(false);
+            int intMostrarItens = Integer.parseInt(listBoxMostarApenas.getSelectedValue());
+            GraficoColunaObs.drawChart(getFlexTableGrafico(), result, intMostrarItens);
+        }
+
+    }
+    
+    
+    private class callbackGraficosTortaObs implements AsyncCallback<ArrayList<String>> {
+
+        public void onFailure(Throwable caught) {
+            mpLoading.setVisible(false);
+            mpDialogBoxWarning.setTitle(txtConstants.geralAviso());
+            mpDialogBoxWarning.setBodyText("Gráfico não pode ser carregado corretamente");
+            mpDialogBoxWarning.showDialog();
+        }
+
+        @Override
+        public void onSuccess(ArrayList<String> result) {
+            mpLoading.setVisible(false);
+            int intMostrarItens = Integer.parseInt(listBoxMostarApenas.getSelectedValue());
+            GraficoTortaObs.drawChart(getFlexTableGrafico(), result, intMostrarItens);
         }
 
     }
@@ -380,6 +431,8 @@ public class PaginaGraficosAvaliacao extends VerticalPanel {
                 flexTableFilter.getWidget(1, 12).setVisible(true);
                 flexTableFilter.getWidget(2, 12).setVisible(true);
                 flexTableFilter.getWidget(1, 13).setVisible(true);
+            }
+            if (strGrafico.equals(Avaliacao.STR_GRAFICO_OBS_COLUNA)) {            
             }
 
         }  

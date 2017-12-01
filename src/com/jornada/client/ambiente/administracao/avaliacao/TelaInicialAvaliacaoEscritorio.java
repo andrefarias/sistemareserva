@@ -14,6 +14,7 @@ public class TelaInicialAvaliacaoEscritorio extends Composite {
 
     private PaginaAdicionarAvaliacao adicionarAvaliacao;
     private PaginaGraficosAvaliacao graficosAvaliacao;
+    private PaginaEditarAvaliacao editarAvaliacao;
 
     TextConstants txtConstants;
     
@@ -37,6 +38,7 @@ public class TelaInicialAvaliacaoEscritorio extends Composite {
         txtConstants = GWT.create(TextConstants.class);
 
         adicionarAvaliacao = PaginaAdicionarAvaliacao.getInstance(this);
+        editarAvaliacao = PaginaEditarAvaliacao.getInstance(this);
         graficosAvaliacao = PaginaGraficosAvaliacao.getInstance(this);
 //        editarReserva = EditarReserva.getInstance(this);
 
@@ -52,6 +54,7 @@ public class TelaInicialAvaliacaoEscritorio extends Composite {
 //        vPanelBody.add(editarReserva);
 
         tabLayoutPanel.add(adicionarAvaliacao, new MpHeaderWidget("Adicionar Pesquisa Satisfação", "images/plus-circle.png"));
+        tabLayoutPanel.add(editarAvaliacao, new MpHeaderWidget("Editar Observações", "images/comment_edit.png"));
         tabLayoutPanel.add(graficosAvaliacao, new MpHeaderWidget("Gráficos Pesquisa Satisfação", "images/chart-icon_16.png"));
 //        tabLayoutPanel.add(editarReserva, new MpHeaderWidget("Alterar Reserva", "images/comment_edit.png"));
         tabLayoutPanel.selectTab(0);

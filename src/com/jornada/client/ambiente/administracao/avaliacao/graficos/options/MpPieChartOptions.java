@@ -16,9 +16,9 @@ public class MpPieChartOptions {
     public MpPieChartOptions(String strLegend){
         // Set options
         options = PieChartOptions.create();  
-        String[] data = {"#4caf4e", "#6ec870", "#fff9c4", "#ffab91","#e53935"};
+//        String[] data = {"#4caf4e", "#6ec870", "#fff9c4", "#ffab91","#e53935"};
 //        String[] data = {"#4caf4e", "#add581", "#fff9c4", "#ffab91","#e53935"};
-        options.setColors(data);
+//        options.setColors(data);
         options.setFontName("Tahoma");
         options.setIs3D(false);
         Animation animation = Animation.create();
@@ -42,6 +42,8 @@ public class MpPieChartOptions {
     public PieChartOptions getOptions() {
         return options;
     }
+
+
     
     
     

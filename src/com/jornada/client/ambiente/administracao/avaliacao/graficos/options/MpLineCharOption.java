@@ -12,12 +12,12 @@ public class MpLineCharOption {
         
         options = LineChartOptions.create();
         VAxis vAxis = VAxis.create("Média");
-        vAxis.setMinValue(1);
-        vAxis.setMaxValue(4);
+        vAxis.setMinValue(3);
+        vAxis.setMaxValue(3);
         HAxis hAxis = HAxis.create(strEscala);
         
         options.setFontName("Tahoma");
-        options.setTitle("Evolução da Satisfação do Restaurante por Serviço");
+        options.setTitle("Evolução da Satisfação do Restaurante por Serviço (Escala de 1 a 4)");
         options.setHAxis(hAxis);
         options.setVAxis(vAxis);
         options.setWidth(1200);

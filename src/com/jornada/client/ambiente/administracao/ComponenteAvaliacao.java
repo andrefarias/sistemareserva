@@ -31,7 +31,7 @@ public class ComponenteAvaliacao extends Composite {
 		
 		this.mainView=mainView;
 		
-		String strTitle = "Avaliação de Clientes\n";
+		String strTitle = "Pesquisa de Satisfação\n";
 		String strImageAddress = "images/product_documentation.png";
 		String strText = "Visualizar e imprimir avaliações\n";
 		strText+="- Gráficos\n";

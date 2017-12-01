@@ -4,28 +4,14 @@ import java.util.ArrayList;
 
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.InlineHTML;
-import com.google.gwt.user.client.ui.Label;
 import com.googlecode.gwt.charts.client.ChartLoader;
 import com.googlecode.gwt.charts.client.ChartPackage;
 import com.googlecode.gwt.charts.client.ColumnType;
 import com.googlecode.gwt.charts.client.DataTable;
 import com.googlecode.gwt.charts.client.corechart.LineChart;
-import com.googlecode.gwt.charts.client.corechart.LineChartOptions;
-import com.googlecode.gwt.charts.client.corechart.PieChart;
-import com.googlecode.gwt.charts.client.options.Animation;
-import com.googlecode.gwt.charts.client.options.AnimationEasing;
-import com.googlecode.gwt.charts.client.options.CurveType;
-import com.googlecode.gwt.charts.client.options.HAxis;
-import com.googlecode.gwt.charts.client.options.TitlePosition;
-import com.googlecode.gwt.charts.client.options.VAxis;
 import com.jornada.client.ambiente.administracao.avaliacao.graficos.options.MpLineCharOption;
-import com.jornada.client.ambiente.administracao.avaliacao.graficos.options.MpPieChartOptions;
-import com.jornada.client.classes.widgets.label.MpLabelCenter;
-import com.jornada.client.classes.widgets.label.MpLabelCenterBold;
-import com.jornada.client.classes.widgets.label.MpLabelLeftAvaliacao;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
 import com.jornada.shared.classes.pesquisasatisfacao.MediaServico;
-import com.sun.javafx.charts.Legend.LegendItem;
 
 public class GraficoLinhaServicosRestaurante {
     
@@ -158,12 +144,11 @@ public class GraficoLinhaServicosRestaurante {
                   }
                   
                   MpLineCharOption geralOptions = new MpLineCharOption(strEscala);
-                  geralOptions.getOptions().setTitle("Evolução da Satisfação Geral do Restaurante");
+                  geralOptions.getOptions().setTitle("Evolução da Satisfação Geral do Restaurante (Escala de 1 a 4)");
                   
                   chartLineGeral.draw(dataTableGeral, geralOptions.getOptions());
                   chartLineGeral.onResize();
-                  chartLineGeral.redraw();                 
-
+                  chartLineGeral.redraw();           
 
             }
         });

@@ -20,6 +20,7 @@ import java.util.Date;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.jornada.shared.classes.Reserva;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
 import com.jornada.shared.classes.pesquisasatisfacao.MediaServico;
 
@@ -37,6 +38,10 @@ public interface GWTServiceAvaliacao extends RemoteService {
     public ArrayList<String> getGraficoAtendentes(String strCidade,String strAtendente, Date dataInicial, Date dataFinal);
     public ArrayList<String> getCidades();
     public ArrayList<ArrayList<MediaServico>> getGraficoServicos(String strCidade, String strEscala, Date dataInicial, Date dataFinal);
+    public ArrayList<Avaliacao> getAvaliacoes(Date dataInicial, Date dataFinal, String strOrdem);
+    public boolean updateRow(Avaliacao object);
+    public boolean deleteRow(int idReserva); 
+    public ArrayList<String> getGraficoColunaObs(String strCidades, Date dataInicial, Date dataFinal);
     
 	public static class Util {
 		private static GWTServiceAvaliacaoAsync instance;
@@ -47,4 +52,6 @@ public interface GWTServiceAvaliacao extends RemoteService {
 			return instance;
 		}
 	}
+
+	
 }

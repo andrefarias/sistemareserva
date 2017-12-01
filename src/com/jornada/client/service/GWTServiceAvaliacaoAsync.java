@@ -24,4 +24,12 @@ public interface GWTServiceAvaliacaoAsync {
 
     public void getGraficoServicos(String strCidade, String strEscala, Date dataInicial, Date dataFinal, AsyncCallback<ArrayList<ArrayList<MediaServico>>> callback);
 
+    public void getAvaliacoes(Date dataInicial, Date dataFinal, String strOrdem, AsyncCallback<ArrayList<Avaliacao>> callback);
+
+    public void updateRow(Avaliacao object, AsyncCallback<Boolean> callback);
+
+    public void deleteRow(int idReserva, AsyncCallback<Boolean> callback);
+
+    public void getGraficoColunaObs(String strCidades, Date dataInicial, Date dataFinal, AsyncCallback<ArrayList<String>> callback);
+
 }

@@ -129,6 +129,14 @@
 		<servlet-name>GWTServiceIdioma</servlet-name>
 		<url-pattern>/jornada/GWTServiceIdioma</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>GWTServiceAvaliacao</servlet-name>
+		<servlet-class>com.jornada.server.service.GWTServiceAvaliacaoImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GWTServiceAvaliacao</servlet-name>
+		<url-pattern>/jornada/GWTServiceAvaliacao</url-pattern>
+	</servlet-mapping>
 <!-- 	<servlet> -->
 <!-- 		<servlet-name>GWTServicePresenca</servlet-name> -->
 <!-- 		<servlet-class>com.jornada.server.service.GWTServicePresencaImpl</servlet-class> -->

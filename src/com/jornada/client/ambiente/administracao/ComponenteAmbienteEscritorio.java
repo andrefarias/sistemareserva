@@ -34,7 +34,7 @@ public class ComponenteAmbienteEscritorio extends Composite {
 		this.mainView=mainView;
 
 		
-		String strTitle = txtConstants.cursoAdmin();
+		String strTitle = "Reserva de Mesas";
 		String strImageAddress = "images/address_book_new.128.128.png";
 		String strText = txtConstants.cursoAdminCompText1();
 		strText+=txtConstants.cursoAdminCompText2();

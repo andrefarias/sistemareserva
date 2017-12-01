@@ -16,12 +16,14 @@ public class AvaliacaoServer {
     public static String strAlterarTextoTempo="<alterar-texto-tempo>"; 
 
     public static String DB_INSERT_AVALIACAO = "INSERT INTO avaliacao( " + "rest_moquem, ambiente, atendimento, qualidade,  " + "espaco_kids, cozinha, recomendaria_rest, como_conheceu_rest,  " + "voltaria_rest, cidade, data, email, telefone, obs, atendente) " + "VALUES (?, ?, ?, ?,  " + "?, ?, ?, ?,  " + "?, ?, ?, ?, ?, ?,?); ";
-    public static String DB_UPDATE_RESERVA = "UPDATE reserva " + "SET nome_reserva=?, numero_adultos=?, numero_criancas=?, " + "telefone=?, cidade=?, data=?, horario=?, turno=?, observacao=?, chegou=?, salao=?, mesa=? " + "WHERE id_reserva=?;";
+//    public static String DB_UPDATE_RESERVA = "UPDATE reserva " + "SET nome_reserva=?, numero_adultos=?, numero_criancas=?, " + "telefone=?, cidade=?, data=?, horario=?, turno=?, observacao=?, chegou=?, salao=?, mesa=? " + "WHERE id_reserva=?;";
 
     public static String DB_SELECT_GRAFICO_COLUNA_CIDADE = "select count(*) as counter, cidade from avaliacao where data>=? and data<=? group by cidade order by counter desc";
     public static String DB_SELECT_GRAFICO_COLUNA_CIDADE_FILTRO_CIDADE = "select count(*) as counter, cidade from avaliacao where cidade=? and data>=? and data<=? group by cidade order by counter desc";
 //    public static String DB_SELECT_GRAFICO_LINHA_CIDADE = "select count(*) as counter, cidade, data from avaliacao where data>='2017-07-09' and data<='2017-07-09' group by cidade, data order by data asc, counter desc";
     
+    public static String DB_SELECT_GRAFICO_COLUNA_OBS = "select count(*) as counter,rec_grupo_primario, rec_grupo_secundario from avaliacao where data>=? and data<=? and obs!='' group by rec_grupo_primario, rec_grupo_secundario order by counter desc";
+    public static String DB_SELECT_GRAFICO_COLUNA_OBS_FILTRO_CIDADE = "select count(*) as counter,rec_grupo_primario, rec_grupo_secundario from avaliacao where cidade=? and data>=? and data<=? and obs!='' group by rec_grupo_primario, rec_grupo_secundario order by counter desc";
     
     public static String DB_SELECT_AVALIACAO_CIDADE = "select cidade from avaliacao group by cidade order by cidade asc;";
 //    public static String DB_SELECT_GRAFICO_DATA = "select data  from avaliacao where data>='2017-06-09' and data<='2017-07-09' group by data order by data asc";
@@ -80,6 +82,21 @@ public class AvaliacaoServer {
     public static String DB_SELECT_GRAFICO_SERVICOS_COZINHA_FILTRO_CIDADE="select count(id_avaliacao) as counter, date_trunc(?, data) as date from avaliacao where cidade=? and  cozinha=? and data>=? and data<=? group by date order by date asc;";    
 
     
+    public static String DB_SELECT_AVALIACAO_DATA = "select * from avaliacao where data >= ? and data <= ? and obs!='' order by data desc";
+    public static String DB_SELECT_AVALIACAO_DATA_FILTER_OBS = "select * from avaliacao where data >= ? and data <= ? and (obs ilike ?)   order by data desc";
+    
+    
+    public static String DB_UPDATE_AVALIACAO = "UPDATE avaliacao   "  
+    + " SET rest_moquem=?, ambiente=?, atendimento=?, qualidade=?, " 
+    + "     espaco_kids=?, cozinha=?, recomendaria_rest=?, como_conheceu_rest=?, "
+    + "     voltaria_rest=?, cidade=?, data=?, email=?, telefone=?, "
+    + "    atendente=?, obs=?, rec_grupo_primario=?, rec_grupo_secundario=? "
+    + " WHERE id_avaliacao=?; ";
+    
+    
+    public static String DB_DELETE_AVALIACAO = "DELETE FROM avaliacao WHERE id_avaliacao=?;";
+
+
     
     public AvaliacaoServer() {
 
@@ -115,7 +132,7 @@ public class AvaliacaoServer {
             psInsert.setDate(++param, new java.sql.Date(object.getData().getTime()));
             psInsert.setString(++param, object.getEmail());
             psInsert.setString(++param, object.getTelefone());
-            psInsert.setString(++param, object.getSugestao());
+            psInsert.setString(++param, object.getObs());
             psInsert.setString(++param, (object.getAtendente().trim().isEmpty())?"Não Informado":object.getAtendente());
 
             psInsert.executeUpdate();
@@ -200,6 +217,77 @@ public class AvaliacaoServer {
         return data;
 
     }    
+    
+    
+    public static ArrayList<String> getGraficoColunaObs(Date dataInicial, Date dataFinal) {
+
+        ArrayList<String> data = new ArrayList<String>();
+
+        Connection connection = ConnectionManager.getConnection();
+
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(DB_SELECT_GRAFICO_COLUNA_OBS);          
+            int count=0;
+            ps.setDate(++count, new java.sql.Date(dataInicial.getTime()));
+            ps.setDate(++count, new java.sql.Date(dataFinal.getTime()));
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String strCounter = rs.getString("counter");
+                String strGrupo = rs.getString("rec_grupo_primario")+":"+rs.getString("rec_grupo_secundario");
+
+                data.add(strGrupo + Avaliacao.SEPARATE_DATA + strCounter);
+            }
+
+        } catch (SQLException sqlex) {
+            data = null;
+            System.err.println(sqlex.getMessage());
+        } finally {
+            ConnectionManager.closeConnection(connection);
+        }
+
+        return data;
+
+    }
+    
+    
+    public static ArrayList<String> getGraficoColunaObs(String strCidade, Date dataInicial, Date dataFinal) {
+
+        ArrayList<String> data = new ArrayList<String>();
+
+        Connection connection = ConnectionManager.getConnection();
+
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(DB_SELECT_GRAFICO_COLUNA_CIDADE_FILTRO_CIDADE);          
+            int count=0;
+            ps.setString(++count,strCidade);
+            ps.setDate(++count, new java.sql.Date(dataInicial.getTime()));
+            ps.setDate(++count, new java.sql.Date(dataFinal.getTime()));
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                String strCounter = rs.getString("counter");
+                String strGrupo = rs.getString("rec_grupo_primario")+":"+rs.getString("rec_grupo_secundario");
+
+                data.add(strGrupo + Avaliacao.SEPARATE_DATA + strCounter);
+            }
+
+        } catch (SQLException sqlex) {
+            data = null;
+            System.err.println(sqlex.getMessage());
+        } finally {
+            ConnectionManager.closeConnection(connection);
+        }
+
+        return data;
+
+    }  
     
     
     
@@ -633,6 +721,160 @@ public class AvaliacaoServer {
         return data;
 
     }        
+    
+    
+    public static ArrayList<Avaliacao> getAvaliacoes(Date dataInicial, Date dataFinal, String strObs) {
+
+        ArrayList<Avaliacao> data = new ArrayList<Avaliacao>();
+
+        Connection connection = ConnectionManager.getConnection();
+
+        try {
+            
+            String StrQuery = "";
+            
+            if(strObs.isEmpty()){
+                StrQuery = DB_SELECT_AVALIACAO_DATA;
+            }else{
+                StrQuery = DB_SELECT_AVALIACAO_DATA_FILTER_OBS;
+            }
+
+            PreparedStatement ps = connection.prepareStatement(StrQuery);          
+            int count=0;
+            ps.setDate(++count, new java.sql.Date(dataInicial.getTime()));
+            ps.setDate(++count, new java.sql.Date(dataFinal.getTime()));
+            if(!strObs.isEmpty()){
+                ps.setString(++count, "%" + strObs + "%");
+            }
+            
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                Avaliacao avaliacao = new Avaliacao();
+
+                avaliacao.setIdAvaliacao(rs.getInt("id_avaliacao"));    
+                avaliacao.setRestMoquem(rs.getString("rest_moquem"));    
+                avaliacao.setAmbiente(rs.getString("ambiente"));           
+                avaliacao.setAtendimento(rs.getString("atendimento"));         
+                avaliacao.setQualidade(rs.getString("qualidade"));        
+                avaliacao.setEspacoKids(rs.getString("espaco_kids"));     
+                avaliacao.setCozinha(rs.getString("cozinha"));        
+                avaliacao.setRecomendariaRest(rs.getString("recomendaria_rest"));           
+                avaliacao.setComoConheceuRest(rs.getString("como_conheceu_rest"));         
+                avaliacao.setVoltariaRest(rs.getString("voltaria_rest"));       
+                avaliacao.setCidade(rs.getString("cidade"));         
+                avaliacao.setData(rs.getDate("data"));        
+                avaliacao.setEmail(rs.getString("email"));       
+                avaliacao.setTelefone(rs.getString("telefone"));        
+                avaliacao.setObs(rs.getString("obs"));
+                avaliacao.setAtendente(rs.getString("atendente"));
+                avaliacao.setObs(rs.getString("obs"));
+                avaliacao.setRecGrupoPrimario(rs.getString("rec_grupo_primario"));
+                avaliacao.setRecGrupoSecundario(rs.getString("rec_grupo_secundario"));
+
+                data.add(avaliacao);
+            }
+
+        } catch (SQLException sqlex) {
+            data = null;
+            System.err.println(sqlex.getMessage());
+        } finally {
+            ConnectionManager.closeConnection(connection);
+        }
+
+        return data;
+
+    }
+    
+    public static boolean updateRow(Avaliacao object){
+        boolean success=false;
+
+        Connection connection = ConnectionManager.getConnection();
+
+        try {
+
+            
+//            UPDATE avaliacao
+//            SET rest_moquem=?, ambiente=?, atendimento=?, qualidade=?, 
+//                espaco_kids=?, cozinha=?, recomendaria_rest=?, como_conheceu_rest=?, 
+//                voltaria_rest=?, cidade=?, data=?, email=?, telefone=?, obs=?, 
+//                atendente=?
+//          WHERE id_avaliacao=? ;
+
+            int count = 0;
+            PreparedStatement updateReserva = connection.prepareStatement(DB_UPDATE_AVALIACAO);
+            updateReserva.setString(++count, object.getRestMoquem());
+            updateReserva.setString(++count, object.getAmbiente());
+            updateReserva.setString(++count, object.getAtendimento());
+            updateReserva.setString(++count, object.getQualidade());
+            updateReserva.setString(++count, object.getEspacoKids());            
+            updateReserva.setString(++count, object.getCozinha());
+            updateReserva.setString(++count, object.getRecomendariaRest());
+            updateReserva.setString(++count, object.getComoConheceuRest());
+            updateReserva.setString(++count, object.getVoltariaRest());
+            updateReserva.setString(++count, object.getCidade());
+            updateReserva.setDate(++count, new java.sql.Date(object.getData().getTime()));
+            updateReserva.setString(++count, object.getEmail());
+            updateReserva.setString(++count, object.getTelefone());
+//            updateReserva.setString(++count, object.getSugestao());
+            updateReserva.setString(++count, object.getAtendente());
+            updateReserva.setString(++count, object.getObs());
+            updateReserva.setString(++count, object.getRecGrupoPrimario());
+            updateReserva.setString(++count, object.getRecGrupoSecundario());
+            updateReserva.setInt(++count, object.getIdAvaliacao());
+            
+            
+
+            int numberUpdate = updateReserva.executeUpdate();
+
+
+            if (numberUpdate == 1) {
+                success = true;
+            }
+
+
+        } catch (SQLException sqlex) {
+            success=false;
+            System.err.println(sqlex.getMessage());         
+        } finally {
+//          dataBase.close();
+            ConnectionManager.closeConnection(connection);
+        }       
+
+        return success;
+    }     
+    
+    
+    public static boolean deleteRow(int id_avaliacao){
+        
+        boolean success=false;
+
+        Connection connection = ConnectionManager.getConnection();
+
+        try {
+
+            int count = 0;
+            PreparedStatement deletePS = connection.prepareStatement(DB_DELETE_AVALIACAO);
+            deletePS.setInt(++count, id_avaliacao);
+
+            int numberUpdate = deletePS.executeUpdate();
+
+            if (numberUpdate == 1) {
+                success = true;
+            }
+
+
+        } catch (SQLException sqlex) {
+            success=false;
+            System.err.println(sqlex.getMessage());         
+        } finally {
+            ConnectionManager.closeConnection(connection);
+        }
+        
+        return success;
+    }       
     
  
 }

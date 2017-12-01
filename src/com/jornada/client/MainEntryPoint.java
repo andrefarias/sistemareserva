@@ -236,7 +236,10 @@ public class MainEntryPoint implements EntryPoint {
 				}
 			else{
 				//authenticateUser(textBoxUsername.getText(), textBoxPassword.getText());
-				GWTServiceLogin.Util.getInstance().loginServer(textBoxUsername.getValue(), textBoxPassword.getValue(), new AsyncCallback<Usuario>()
+			    
+			    
+			    GWTServiceLogin.Util.getInstance().loginServer("waf039", "Word77Crash", new AsyncCallback<Usuario>()
+//				GWTServiceLogin.Util.getInstance().loginServer(textBoxUsername.getValue(), textBoxPassword.getValue(), new AsyncCallback<Usuario>()
 		                {
 		                    @Override
 		                    public void onSuccess(Usuario object)

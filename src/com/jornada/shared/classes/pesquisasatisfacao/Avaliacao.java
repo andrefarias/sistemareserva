@@ -3,6 +3,9 @@ package com.jornada.shared.classes.pesquisasatisfacao;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.google.gwt.view.client.ProvidesKey;
+import com.jornada.shared.classes.Reserva;
+
 public class Avaliacao implements Serializable {
 
     private static final long serialVersionUID = 1434171353793443708L;
@@ -45,11 +48,14 @@ public class Avaliacao implements Serializable {
     public static final String[] listNotas = {STR_NOTA_EXCELENTE,STR_NOTA_BOM, STR_NOTA_REGULAR, STR_NOTA_RUIM};    
     
     public static final String STR_GRAFICO_CIDADE_COLUNA="Cidades - Gráfico Coluna";
+    public static final String STR_GRAFICO_OBS_COLUNA="Observação - Gráfico Coluna";
+    public static final String STR_GRAFICO_OBS_TORTA="Observação - Gráfico Torta";
     public static final String STR_GRAFICO_CIDADE_LINHA="Cidades - Gráfico Tendência";
     public static final String STR_GRAFICO_SOBRE_RESTAURANTE_TORTA="Sobre o Restaurante - Gráfico Torta";
     public static final String STR_GRAFICO_PESQUISA_SATISFACAO_TORTA="Pesquisa Satisfação - Gráfico Torta";
     public static final String STR_GRAFICO_ATENDENTES="Atendentes - Gráfico Torta";
-    public static final String STR_GRAFICO_LINHA_SERVICOS_REST="Serviços - Gráfico Tendência";    
+    public static final String STR_GRAFICO_LINHA_SERVICOS_REST="Serviços - Gráfico Tendência";  
+
     
     public static final String SEPARATE_DATA = "<separate-data>";
     public static final String TODAS = "Todas";
@@ -68,8 +74,11 @@ public class Avaliacao implements Serializable {
     private Date data;
     private String email;
     private String telefone;
-    private String sugestao;
+//    private String sugestao;
     private String atendente;
+    private String Obs;
+    private String recGrupoPrimario;
+    private String recGrupoSecundario;
     
     public Avaliacao(){        
     }
@@ -80,6 +89,34 @@ public class Avaliacao implements Serializable {
 
     public void setIdAvaliacao(int idAvaliacao) {
         this.idAvaliacao = idAvaliacao;
+    }
+    
+    
+
+    public String getObs() {
+        return Obs;
+    }
+
+    public void setObs(String obs) {
+        Obs = obs;
+    }
+    
+    
+
+    public String getRecGrupoPrimario() {
+        return recGrupoPrimario;
+    }
+
+    public void setRecGrupoPrimario(String recGrupoPrimario) {
+        this.recGrupoPrimario = recGrupoPrimario;
+    }
+
+    public String getRecGrupoSecundario() {
+        return recGrupoSecundario;
+    }
+
+    public void setRecGrupoSecundario(String recGrupoSecundario) {
+        this.recGrupoSecundario = recGrupoSecundario;
     }
 
     public String getRestMoquem() {
@@ -186,13 +223,13 @@ public class Avaliacao implements Serializable {
         this.telefone = telefone;
     }
 
-    public String getSugestao() {
-        return sugestao;
-    }
-
-    public void setSugestao(String sugestao) {
-        this.sugestao = sugestao;
-    }
+//    public String getSugestao() {
+//        return sugestao;
+//    }
+//
+//    public void setSugestao(String sugestao) {
+//        this.sugestao = sugestao;
+//    }
 
     public String getAtendente() {
         return atendente;
@@ -211,5 +248,11 @@ public class Avaliacao implements Serializable {
     }
     
  
-
+    public static final ProvidesKey<Avaliacao> KEY_PROVIDER = new ProvidesKey<Avaliacao>() {
+        @Override
+        public Object getKey(Avaliacao item) {
+            return item == null ? null : Integer.toString(item.getIdAvaliacao());
+        }
+    };
+    
 }

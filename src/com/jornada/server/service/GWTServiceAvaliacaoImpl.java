@@ -22,6 +22,7 @@ import java.util.Date;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornada.client.service.GWTServiceAvaliacao;
 import com.jornada.server.classes.AvaliacaoServer;
+import com.jornada.server.classes.ReservaServer;
 import com.jornada.shared.classes.pesquisasatisfacao.Avaliacao;
 import com.jornada.shared.classes.pesquisasatisfacao.DadoServicoTrend;
 import com.jornada.shared.classes.pesquisasatisfacao.MediaServico;
@@ -46,6 +47,16 @@ public class GWTServiceAvaliacaoImpl extends RemoteServiceServlet implements GWT
         
     }
 
+    @Override
+    public ArrayList<String> getGraficoColunaObs(String strCidades, Date dataInicial, Date dataFinal) {
+        
+        if (strCidades.equals(Avaliacao.TODAS)) {
+            return AvaliacaoServer.getGraficoColunaObs(dataInicial, dataFinal);
+        } else {
+            return AvaliacaoServer.getGraficoColunaObs(strCidades, dataInicial, dataFinal);
+        }
+        
+    }
 
 
     @Override
@@ -257,14 +268,22 @@ public class GWTServiceAvaliacaoImpl extends RemoteServiceServlet implements GWT
         
         return listMediaServico;
     }
-// // Sorting
-//    Collections.sort(listTrend, new Comparator<DadoServicoTrend>() {
-//            @Override
-//            public int compare(DadoServicoTrend fruit2, DadoServicoTrend fruit1)
-//            {
-//
-//                return  fruit1.fruitName.compareTo(fruit2.fruitName);
-//            }
-//        });
+
+    @Override
+    public ArrayList<Avaliacao> getAvaliacoes(Date dataInicial, Date dataFinal, String strObs) {
+
+        return AvaliacaoServer.getAvaliacoes(dataInicial, dataFinal, strObs);
+    }
+
+    @Override
+    public boolean updateRow(Avaliacao object) {
+        return AvaliacaoServer.updateRow(object);
+    }
+
+    @Override
+    public boolean deleteRow(int idReserva) {
+        // TODO Auto-generated method stub
+        return ReservaServer.deleteRow(idReserva);
+    }
 
 }

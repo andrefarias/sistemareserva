@@ -488,7 +488,7 @@ public class MainMenu extends Composite implements ValueChangeHandler {
 	
     public void linkFerramentaAvaliacaoDeClientes(boolean showConnectionLabel){
         imgFerramentaAvaliacaoDeClientes = new Image("images/product_documentation-16.png");
-        linkFerramentaAvaliacaoDeClientes = new Hyperlink("Avaliação de Clientes", txtConstants.menuTokenFerramentaAvaliacaoDeClientes());
+        linkFerramentaAvaliacaoDeClientes = new Hyperlink("Pesquisa de Satisfação", txtConstants.menuTokenFerramentaAvaliacaoDeClientes());
         linkFerramentaAvaliacaoDeClientes.setStyleName("a");
         
         hPanel.add(imgFerramentaAvaliacaoDeClientes);
